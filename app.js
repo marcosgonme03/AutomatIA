@@ -1,48 +1,57 @@
 const fs = require('fs');
 const path = require('path');
 
-// ── Debug log ──
+// ── Debug log (writes to file so we can check on server) ──
 const LOG_FILE = path.join(__dirname, 'app-debug.log');
 function log(msg) {
   const line = `[${new Date().toISOString()}] ${msg}\n`;
-  fs.appendFileSync(LOG_FILE, line);
+  try { fs.appendFileSync(LOG_FILE, line); } catch(e) {}
   console.log(msg);
+  console.error(msg); // also write to stderr.log
 }
 
+process.on('uncaughtException', (err) => {
+  log('UNCAUGHT EXCEPTION: ' + err.message);
+  log(err.stack);
+});
+process.on('unhandledRejection', (err) => {
+  log('UNHANDLED REJECTION: ' + (err && err.message ? err.message : err));
+});
+
 log('=== APP.JS STARTING ===');
+log('CWD: ' + process.cwd());
 log('__dirname: ' + __dirname);
 log('NODE_ENV: ' + process.env.NODE_ENV);
-log('PORT env: ' + process.env.PORT);
+log('Node version: ' + process.version);
 
 try {
-  require('dotenv').config({ path: path.join(__dirname, '.env') });
-  log('.env loaded OK');
+  // Load .env
+  const envPath = path.join(__dirname, '.env');
+  log('.env exists: ' + fs.existsSync(envPath));
+  require('dotenv').config({ path: envPath });
+  log('.env loaded');
 
   const express = require('express');
+  log('express loaded');
   const rateLimit = require('express-rate-limit');
+  log('rate-limit loaded');
   const { initDB } = require('./backend/database');
-
-  log('Modules loaded OK');
+  log('database loaded');
 
   const app = express();
-  const PORT = process.env.PORT || 3000;
-  const BASE = '/AutomatIA';
 
   initDB();
-  log('DB initialized OK');
-
-  // ── Strip /AutomatIA prefix so Express routes match ──
-  app.use((req, res, next) => {
-    if (req.url.startsWith(BASE)) {
-      req.url = req.url.slice(BASE.length) || '/';
-    }
-    next();
-  });
+  log('DB initialized');
 
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(express.static(path.join(__dirname, 'frontend')));
 
+  // Serve frontend files
+  const frontendDir = path.join(__dirname, 'frontend');
+  log('Frontend dir: ' + frontendDir + ' exists: ' + fs.existsSync(frontendDir));
+  app.use(express.static(frontendDir));
+
+  // Rate limiting
   const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
   const contactLimiter = rateLimit({
     windowMs: 60 * 60 * 1000,
@@ -52,29 +61,41 @@ try {
 
   app.use('/api/', apiLimiter);
 
+  // Routes
   app.use('/api/contact', contactLimiter, require('./backend/routes/contact'));
   app.use('/api/testimonials', require('./backend/routes/testimonials'));
   app.use('/api/admin', require('./backend/routes/admin'));
+  log('Routes loaded');
 
-  log('Routes loaded OK');
+  // Admin redirect
+  app.get('/admin', (req, res) => res.redirect('/AutomatIA/admin/login.html'));
 
-  app.get('/admin', (req, res) => res.redirect(BASE + '/admin/login.html'));
-
+  // Health check
   app.get('/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
+  // Log every request for debugging
+  app.use((req, res, next) => {
+    log('REQUEST: ' + req.method + ' ' + req.url);
+    next();
+  });
+
+  // Start server — Passenger will hook into this
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     log('Server listening on port ' + PORT);
   });
 
-  log('app.listen() called');
+  log('app.listen() called — waiting for Passenger/port');
 
 } catch (err) {
   log('FATAL ERROR: ' + err.message);
   log(err.stack);
 
+  // Emergency fallback — show error in browser
   const http = require('http');
+  const PORT = process.env.PORT || 3000;
   http.createServer((req, res) => {
     res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(`<h1>Error al arrancar AutomatIA</h1><pre>${err.stack}</pre>`);
-  }).listen(process.env.PORT || 3000);
+    res.end('<h1>Error al arrancar AutomatIA</h1><pre>' + err.stack + '</pre>');
+  }).listen(PORT);
 }
