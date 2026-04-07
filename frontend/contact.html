@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contacta con AutomatIA Pro para una consulta gratuita. Respuesta en 24h. Teléfono, email o formulario de contacto.">
+<meta name="keywords" content="contacto, consulta gratis, automatización, IA, consultoría">
+<meta property="og:title" content="Contacto — AutomatIA Pro">
+<meta property="og:description" content="Solicita tu consulta gratuita de automatización con IA">
+<meta property="og:image" content="/og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<link rel="canonical" href="https://automatia.pro/contact.html">
+<title>Contacto — Solicita tu Consulta Gratuita | AutomatIA Pro</title>
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; max-width: 1100px; margin: 0 auto; }
+  @media(max-width:900px){ .contact-wrap { grid-template-columns: 1fr; } }
+
+  /* LEFT INFO */
+  .contact-info h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; }
+  .contact-info p  { color: var(--muted); font-size: .95rem; line-height: 1.75; margin-bottom: 32px; }
+  .info-items { display: flex; flex-direction: column; gap: 20px; }
+  .info-item  { display: flex; gap: 14px; align-items: flex-start; }
+  .info-icon  { width: 44px; height: 44px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; background: rgba(124,58,237,.12); border: 1px solid rgba(124,58,237,.2); }
+  .info-item h4 { font-size: .88rem; font-weight: 700; margin-bottom: 3px; }
+  .info-item p  { color: var(--muted); font-size: .85rem; margin: 0; }
+  .info-item a  { color: var(--primary-light); text-decoration: none; }
+  .guarantees-mini { margin-top: 36px; display: flex; flex-direction: column; gap: 10px; }
+  .guar-item { display: flex; align-items: center; gap: 10px; font-size: .85rem; color: var(--muted); }
+  .guar-item span { color: var(--green); font-size: 1rem; }
+
+  /* FORM */
+  .contact-form-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px;
+  }
+  .contact-form-wrap h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 28px; }
+  .form-full { grid-column: 1 / -1; }
+  #contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media(max-width:640px){ #contact-form { grid-template-columns: 1fr; } }
+
+  .form-submit { grid-column: 1 / -1; }
+  .form-submit .btn-primary { width: 100%; justify-content: center; font-size: 1rem; padding: 16px; }
+
+  /* SUCCESS STATE */
+  #success-state {
+    display: none; text-align: center; padding: 60px 20px;
+  }
+  .success-icon { font-size: 3.5rem; margin-bottom: 20px; animation: bounceIn .5s ease; }
+  @keyframes bounceIn { 0%{transform:scale(.5);opacity:0} 80%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+  #success-state h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; }
+  #success-state p  { color: var(--muted); font-size: .95rem; line-height: 1.7; }
+
+  .char-count { font-size: .75rem; color: var(--muted2); text-align: right; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div>
+<div class="grid-bg"></div><canvas id="canvas"></canvas>
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="badge-live" style="animation:fadeDown .5s ease both"><span class="badge-dot"></span>Respondo en menos de 24h</div>
+  <h1 style="animation:fadeDown .6s .1s ease both">Reserva tu consulta<br><span class="gradient-text">gratuita</span></h1>
+  <p style="animation:fadeDown .6s .2s ease both">60 minutos para analizar tu empresa y descubrir cuánto puedes ahorrar con automatización. Sin compromiso.</p>
+</div>
+
+<section>
+  <div class="contact-wrap">
+    <!-- LEFT -->
+    <div class="reveal">
+      <h2>Hablemos de tu negocio</h2>
+      <p>Cuéntame qué procesos quieres mejorar. En la consulta gratuita analizamos juntos tu empresa y diseñamos un plan de acción.</p>
+      <div class="info-items">
+        <div class="info-item">
+          <div class="info-icon">📧</div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:marcosgonme03@gmail.com">marcosgonme03@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">⏱️</div>
+          <div>
+            <h4>Tiempo de respuesta</h4>
+            <p>Menos de 24 horas en días laborables</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📅</div>
+          <div>
+            <h4>Disponibilidad</h4>
+            <p>Lunes a viernes · 9:00 – 18:00</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🌍</div>
+          <div>
+            <h4>Modalidad</h4>
+            <p>Videollamada o presencial (Madrid y alrededores)</p>
+          </div>
+        </div>
+      </div>
+      <div class="guarantees-mini">
+        <div class="guar-item"><span>✓</span> Consulta 100% gratuita y sin compromiso</div>
+        <div class="guar-item"><span>✓</span> Sin ventas agresivas — solo valor</div>
+        <div class="guar-item"><span>✓</span> Recibirás un email de confirmación al instante</div>
+        <div class="guar-item"><span>✓</span> Tus datos nunca se comparten con terceros</div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="contact-form-wrap reveal">
+      <h3>Rellena el formulario</h3>
+
+      <div id="success-state">
+        <div class="success-icon">🎉</div>
+        <h3>¡Mensaje recibido!</h3>
+        <p>Gracias por ponerte en contacto. Te responderé en menos de 24 horas para confirmar la consulta.<br><br>También te he enviado un email de confirmación.</p>
+      </div>
+
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="name">Nombre completo *</label>
+          <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="tu@empresa.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Teléfono</label>
+          <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000">
+        </div>
+        <div class="form-group">
+          <label for="company">Empresa</label>
+          <input type="text" id="company" name="company" placeholder="Nombre de tu empresa">
+        </div>
+        <div class="form-group">
+          <label for="employees">Número de empleados</label>
+          <select id="employees" name="employees">
+            <option value="">Selecciona...</option>
+            <option value="1-5">1 – 5 empleados</option>
+            <option value="6-20">6 – 20 empleados</option>
+            <option value="21-50">21 – 50 empleados</option>
+            <option value="51-100">51 – 100 empleados</option>
+            <option value="100+">Más de 100</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="service">Servicio de interés</label>
+          <select id="service" name="service">
+            <option value="">Selecciona...</option>
+            <option value="chatbot">Chatbot con IA</option>
+            <option value="email">Email & Marketing Automatizado</option>
+            <option value="documents">Generación de Documentos</option>
+            <option value="analytics">Análisis e Informes</option>
+            <option value="integrations">Integración de Sistemas</option>
+            <option value="processes">Automatización Interna</option>
+            <option value="other">Otro / No sé todavía</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="preferred_date">Fecha preferida para la consulta</label>
+          <input type="date" id="preferred_date" name="preferred_date">
+        </div>
+        <div class="form-group">
+          <label for="preferred_time">Hora preferida</label>
+          <select id="preferred_time" name="preferred_time">
+            <option value="">Selecciona...</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label for="message">Cuéntame tu caso</label>
+          <textarea id="message" name="message" rows="4" maxlength="1000" placeholder="¿Qué procesos quieres automatizar? ¿Cuál es tu mayor dolor de cabeza operativo?"></textarea>
+          <div class="char-count"><span id="char-count">0</span>/1000</div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn-primary" id="submit-btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Reservar consulta gratuita
+          </button>
+          <p style="text-align:center;color:var(--muted2);font-size:.78rem;margin-top:10px">🛡️ Datos protegidos · Sin spam · Sin compromiso</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="/js/common.js"></script>
+<script>
+  // Set min date to tomorrow
+  const dateInput = document.getElementById('preferred_date');
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+
+  // Char counter
+  const msg = document.getElementById('message');
+  const counter = document.getElementById('char-count');
+  msg.addEventListener('input', () => { counter.textContent = msg.value.length; });
+
+  // Form submit
+  document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const form = e.target;
+
+    const name  = form.name.value.trim();
+    const email = form.email.value.trim();
+    if (!name)  { showToast('El nombre es obligatorio.', 'error'); return; }
+    if (!email) { showToast('El email es obligatorio.', 'error'); return; }
+
+    btn.disabled = true;
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Enviando...';
+
+    const body = {
+      name, email,
+      phone: form.phone.value.trim(),
+      company: form.company.value.trim(),
+      employees: form.employees.value,
+      service: form.service.value,
+      preferred_date: form.preferred_date.value,
+      preferred_time: form.preferred_time.value,
+      message: form.message.value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Error desconocido');
+
+      form.style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      showToast('¡Mensaje enviado! Te respondo en menos de 24h.', 'success');
+    } catch (err) {
+      showToast(err.message || 'Error al enviar. Inténtalo de nuevo.', 'error');
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Reservar consulta gratuita';
+    }
+  });
+</script>
+</body>
+</html>

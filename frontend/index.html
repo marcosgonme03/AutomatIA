@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Automatiza tu PYME con IA. Reduce costes 40%, elimina tareas repetitivas y escala sin contratar más personal. Consultoría personalizada de automatización.">
+<meta name="keywords" content="automatización IA, chatbots, automatizar empresa, software IA, inteligencia artificial pequeña empresa">
+<meta name="author" content="AutomatIA Pro">
+<meta property="og:title" content="AutomatIA Pro — Automatización Inteligente para tu PYME">
+<meta property="og:description" content="Transforma tu empresa con IA. Reduce costes 40%, elimina tareas repetitivas y escala sin hiring.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/og-image.png">
+<meta property="og:url" content="https://automatia.pro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AutomatIA Pro — Automatización con IA">
+<meta name="twitter:description" content="Soluciones de IA 100% personalizadas para empresas">
+<meta name="twitter:image" content="/og-image.png">
+<meta name="robots" content="index, follow">
+<meta name="language" content="es">
+<link rel="canonical" href="https://automatia.pro/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect fill='%237c3aed' width='180' height='180' rx='40'/><text x='50%' y='50%' font-size='100' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<title>AutomatIA Pro — Automatización Inteligente para PYMEs | Reducción de Costes hasta 40%</title>
+<link rel="stylesheet" href="/css/main.css">
+<style>
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 120px 5% 80px;
+    position: relative; z-index: 1;
+  }
+  #hero h1 {
+    font-size: clamp(3rem, 6.5vw, 5.8rem);
+    font-weight: 900; letter-spacing: -2.5px; line-height: 1.04;
+    margin-bottom: 24px;
+    animation: fadeDown .6s .1s ease both;
+  }
+  .typewriter-wrap { min-height: 2em; animation: fadeDown .6s .2s ease both; }
+  #typewriter { font-size: clamp(1rem, 2.2vw, 1.5rem); font-weight: 700; color: var(--cyan); font-family: 'JetBrains Mono', monospace; }
+  .cursor { display: inline-block; width: 2px; height: 1.1em; background: var(--cyan); margin-left: 2px; vertical-align: middle; animation: blink 1s step-end infinite; }
+  @keyframes blink { 50%{opacity:0} }
+  .hero-sub { max-width: 600px; color: var(--muted); font-size: 1.08rem; margin: 18px auto 36px; animation: fadeDown .6s .3s ease both; }
+  .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; animation: fadeDown .6s .4s ease both; }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 68px; flex-wrap: wrap;
+    justify-content: center; animation: fadeDown .6s .5s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+  .stat-label { color: var(--muted); font-size: .8rem; margin-top: 4px; }
+  .stat-div { width: 1px; background: var(--border); }
+  .scroll-cue {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: var(--muted); font-size: .72rem; animation: fadeDown .6s .9s ease both;
+  }
+  .scroll-mouse { width: 22px; height: 36px; border: 2px solid var(--border); border-radius: 11px; display: flex; align-items: flex-start; justify-content: center; padding-top: 5px; }
+  .scroll-wheel { width: 3px; height: 7px; background: var(--muted); border-radius: 2px; animation: sw 2s infinite; }
+  @keyframes sw { 0%{transform:translateY(0);opacity:1} 100%{transform:translateY(9px);opacity:0} }
+
+  /* ── PAIN POINTS ── */
+  #pain { background: var(--bg2); }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 18px; }
+  .pain-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 26px;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: border-color .3s, transform .3s;
+  }
+  .pain-card:hover { border-color: rgba(239,68,68,.35); transform: translateY(-3px); }
+  .pain-icon { width: 46px; height: 46px; background: rgba(239,68,68,.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+  .pain-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 5px; }
+  .pain-card p { font-size: .87rem; color: var(--muted); }
+
+  /* ── SERVICES PREVIEW ── */
+  .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  .svc-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px; position: relative; overflow: hidden;
+    transition: transform .3s, border-color .3s, box-shadow .3s; cursor: pointer;
+  }
+  .svc-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 0% 0%, rgba(124,58,237,.12), transparent 60%); opacity: 0; transition: opacity .3s; }
+  .svc-card:hover::before { opacity: 1; }
+  .svc-card:hover { transform: translateY(-5px); border-color: rgba(124,58,237,.45); box-shadow: 0 18px 50px rgba(124,58,237,.12); }
+  .svc-icon { width: 52px; height: 52px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 18px; }
+  .svc-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+  .svc-card p { color: var(--muted); font-size: .88rem; line-height: 1.7; }
+  .svc-arrow { position: absolute; top: 32px; right: 32px; color: var(--muted); transition: transform .2s, color .2s; }
+  .svc-card:hover .svc-arrow { transform: translate(4px,-4px); color: var(--primary-light); }
+
+  /* ── PROCESS PREVIEW ── */
+  #process-prev { background: var(--bg2); }
+  .steps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; position: relative; }
+  .steps-row::before { content: ''; position: absolute; top: 50px; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), var(--cyan), transparent); }
+  .step { text-align: center; padding: 0 20px; }
+  .step-num { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-light)); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 900; margin: 0 auto 20px; box-shadow: 0 0 25px rgba(124,58,237,.45); position: relative; z-index: 1; }
+  .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .step p { color: var(--muted); font-size: .87rem; }
+
+  /* ── RESULTS PREVIEW ── */
+  .results-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+  .res-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px 20px; text-align: center; position: relative; overflow: hidden;
+  }
+  .res-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--cyan)); }
+  .res-num { font-size: 2.8rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; display: block; margin-bottom: 6px; }
+  .res-card h3 { font-size: .9rem; font-weight: 600; margin-bottom: 4px; }
+  .res-card p { font-size: .78rem; color: var(--muted); }
+
+  /* ── CTA ── */
+  .cta-box {
+    max-width: 760px; margin: 0 auto;
+    background: linear-gradient(135deg, rgba(124,58,237,.15), rgba(6,182,212,.08));
+    border: 1px solid rgba(124,58,237,.28);
+    border-radius: 22px; padding: 64px 40px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-box::before { content: ''; position: absolute; top:-50%;left:-50%;width:200%;height:200%; background: radial-gradient(circle, rgba(124,58,237,.07),transparent 60%); animation: rotateBg 15s linear infinite; }
+  @keyframes rotateBg { to { transform: rotate(360deg); } }
+  .cta-box h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800; letter-spacing: -1px; margin-bottom: 14px; position: relative; }
+  .cta-box p { color: var(--muted); font-size: 1rem; margin-bottom: 30px; position: relative; }
+  .cta-box .btn-primary { position: relative; }
+  .guarantee { margin-top: 16px; color: var(--muted2); font-size: .82rem; position: relative; }
+
+  @media(max-width:768px){
+    .stat-div{display:none} .hero-stats{gap:24px}
+    .steps-row::before{display:none}
+    .cta-box{padding:40px 24px}
+  }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+<div class="grid-bg"></div>
+<canvas id="canvas"></canvas>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="badge-live" style="animation:fadeDown .5s ease both">
+    <span class="badge-dot"></span> Disponible para nuevos proyectos
+  </div>
+  <h1>Automatiza tu PYME<br>con <span class="gradient-text">Inteligencia Artificial</span></h1>
+  <div class="typewriter-wrap">
+    <span id="typewriter"></span><span class="cursor"></span>
+  </div>
+  <p class="hero-sub">Elimina tareas repetitivas, reduce costes y escala tu negocio sin contratar más personal. Soluciones de IA 100% personalizadas para empresas como la tuya.</p>
+  <div class="hero-btns">
+    <a href="/contact.html" class="btn-primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      Quiero automatizar mi empresa
+    </a>
+    <a href="/services.html" class="btn-secondary">Ver servicios →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" data-count="87" data-suffix="%">0</div><div class="stat-label">de tareas automatizables</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num" data-count="40" data-suffix="%">0</div><div class="stat-label">reducción de costes</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num" data-count="3">0</div><div class="stat-label">semanas de implementación</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num" data-count="50" data-suffix="+">0</div><div class="stat-label">PYMEs transformadas</div></div>
+  </div>
+  <div class="scroll-cue"><div class="scroll-mouse"><div class="scroll-wheel"></div></div>scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">🤖 <strong>Automatización de procesos</strong></div>
+    <div class="marquee-item">💬 <strong>Chatbots con IA</strong></div>
+    <div class="marquee-item">📊 <strong>Análisis de datos</strong></div>
+    <div class="marquee-item">✉️ <strong>Email marketing automático</strong></div>
+    <div class="marquee-item">📄 <strong>Generación de documentos</strong></div>
+    <div class="marquee-item">🔗 <strong>Integración de sistemas</strong></div>
+    <div class="marquee-item">📱 <strong>Atención al cliente 24/7</strong></div>
+    <div class="marquee-item">📈 <strong>Reporting inteligente</strong></div>
+    <div class="marquee-item">🤖 <strong>Automatización de procesos</strong></div>
+    <div class="marquee-item">💬 <strong>Chatbots con IA</strong></div>
+    <div class="marquee-item">📊 <strong>Análisis de datos</strong></div>
+    <div class="marquee-item">✉️ <strong>Email marketing automático</strong></div>
+    <div class="marquee-item">📄 <strong>Generación de documentos</strong></div>
+    <div class="marquee-item">🔗 <strong>Integración de sistemas</strong></div>
+    <div class="marquee-item">📱 <strong>Atención al cliente 24/7</strong></div>
+    <div class="marquee-item">📈 <strong>Reporting inteligente</strong></div>
+  </div>
+</div>
+
+<!-- PAIN POINTS -->
+<section id="pain" style="background:var(--bg2)">
+  <div class="section-head centered">
+    <div class="section-label">¿Te suena familiar?</div>
+    <h2 class="section-title">Los problemas que frenan<br>a las PYMEs hoy</h2>
+    <p class="section-sub">Cada hora que tu equipo dedica a tareas manuales es una hora que no se invierte en crecer.</p>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-card reveal"><div class="pain-icon">⏰</div><div><h3>Tareas repetitivas que consumen horas</h3><p>Introducción de datos, envío de emails, informes… la IA puede hacerlo en segundos.</p></div></div>
+    <div class="pain-card reveal"><div class="pain-icon">💸</div><div><h3>Costes operativos disparados</h3><p>Escala la productividad sin multiplicar la nómina.</p></div></div>
+    <div class="pain-card reveal"><div class="pain-icon">😤</div><div><h3>Clientes que esperan respuesta 24/7</h3><p>Cada hora sin respuesta es un cliente que se va con la competencia.</p></div></div>
+    <div class="pain-card reveal"><div class="pain-icon">📉</div><div><h3>Decisiones sin datos reales</h3><p>Podrías tener análisis precisos al instante en lugar de intuición.</p></div></div>
+    <div class="pain-card reveal"><div class="pain-icon">🔀</div><div><h3>Sistemas desconectados</h3><p>CRM, ERP, email… herramientas que no se hablan y generan trabajo extra.</p></div></div>
+    <div class="pain-card reveal"><div class="pain-icon">🐌</div><div><h3>Procesos lentos que frustran</h3><p>Aprobaciones manuales, cuellos de botella. Tu empresa va más lenta de lo que podría.</p></div></div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-prev">
+  <div class="section-head">
+    <div class="section-label">Servicios</div>
+    <h2 class="section-title">Lo que puedo<br>automatizar para ti</h2>
+    <p class="section-sub">Soluciones de IA diseñadas específicamente para las PYMEs.</p>
+  </div>
+  <div class="svc-grid">
+    <a href="/services.html" class="svc-card anim-border reveal" style="text-decoration:none;color:inherit">
+      <div class="svc-icon" style="background:rgba(124,58,237,.15)">💬</div>
+      <span class="svc-arrow">↗</span>
+      <h3>Chatbot IA para Atención al Cliente</h3>
+      <p>Responde dudas, gestiona pedidos y resuelve incidencias 24/7 en WhatsApp, web e Instagram.</p>
+    </a>
+    <a href="/services.html" class="svc-card reveal" style="text-decoration:none;color:inherit">
+      <div class="svc-icon" style="background:rgba(6,182,212,.12)">✉️</div>
+      <span class="svc-arrow">↗</span>
+      <h3>Email & Marketing Automatizado</h3>
+      <p>Secuencias personalizadas, seguimiento de leads y recuperación de carritos sin levantar un dedo.</p>
+    </a>
+    <a href="/services.html" class="svc-card reveal" style="text-decoration:none;color:inherit">
+      <div class="svc-icon" style="background:rgba(16,185,129,.12)">📄</div>
+      <span class="svc-arrow">↗</span>
+      <h3>Generación Automática de Documentos</h3>
+      <p>Contratos, presupuestos, facturas e informes generados desde tus datos al instante.</p>
+    </a>
+    <a href="/services.html" class="svc-card reveal" style="text-decoration:none;color:inherit">
+      <div class="svc-icon" style="background:rgba(245,158,11,.12)">📊</div>
+      <span class="svc-arrow">↗</span>
+      <h3>Análisis e Informes Inteligentes</h3>
+      <p>Dashboards automáticos, alertas en tiempo real. Decisiones basadas en datos, no en suposiciones.</p>
+    </a>
+    <a href="/services.html" class="svc-card reveal" style="text-decoration:none;color:inherit">
+      <div class="svc-icon" style="background:rgba(239,68,68,.12)">🔗</div>
+      <span class="svc-arrow">↗</span>
+      <h3>Integración de Sistemas & APIs</h3>
+      <p>CRM, ERP, tienda online, contabilidad. Todo conectado, datos sincronizados, cero trabajo manual.</p>
+    </a>
+    <a href="/services.html" class="svc-card reveal" style="text-decoration:none;color:inherit">
+      <div class="svc-icon" style="background:rgba(124,58,237,.15)">🤖</div>
+      <span class="svc-arrow">↗</span>
+      <h3>Automatización de Procesos Internos</h3>
+      <p>Onboarding, aprobaciones, notificaciones. Todo lo que se hace manualmente, en piloto automático.</p>
+    </a>
+  </div>
+  <div style="text-align:center;margin-top:40px"><a href="/services.html" class="btn-secondary">Ver todos los servicios →</a></div>
+</section>
+
+<!-- PROCESS PREVIEW -->
+<section id="process-prev" style="background:var(--bg2)">
+  <div class="section-head centered">
+    <div class="section-label">Proceso</div>
+    <h2 class="section-title">De cero a automatizado<br>en 3 semanas</h2>
+  </div>
+  <div class="steps-row">
+    <div class="step reveal"><div class="step-num">1</div><h3>Diagnóstico gratuito</h3><p>Analizo tus procesos e identifico qué automatizar con mayor impacto.</p></div>
+    <div class="step reveal"><div class="step-num">2</div><h3>Diseño a medida</h3><p>Solución adaptada a tu empresa, herramientas y presupuesto.</p></div>
+    <div class="step reveal"><div class="step-num">3</div><h3>Implementación + soporte</h3><p>Instalo, configuro, formo a tu equipo y te acompaño siempre.</p></div>
+  </div>
+  <div style="text-align:center;margin-top:48px"><a href="/process.html" class="btn-secondary">Ver el proceso completo →</a></div>
+</section>
+
+<!-- RESULTS PREVIEW -->
+<section>
+  <div class="section-head centered">
+    <div class="section-label">Resultados reales</div>
+    <h2 class="section-title">Números que hablan<br>por sí solos</h2>
+  </div>
+  <div class="results-row">
+    <div class="res-card reveal"><span class="res-num" data-count="40" data-suffix="%">0%</span><h3>Reducción de costes</h3><p>En procesos operativos</p></div>
+    <div class="res-card reveal"><span class="res-num" data-count="12">0</span><h3>horas/semana ahorradas</h3><p>Por empleado de media</p></div>
+    <div class="res-card reveal"><span class="res-num" data-count="98" data-suffix="%">0%</span><h3>Satisfacción clientes</h3><p>Con atención automatizada</p></div>
+    <div class="res-card reveal"><span class="res-num" data-count="3">0</span><h3>meses para el ROI</h3><p>Retorno de inversión</p></div>
+  </div>
+  <div style="text-align:center;margin-top:40px"><a href="/results.html" class="btn-secondary">Calcular mi ahorro →</a></div>
+</section>
+
+<!-- CTA -->
+<section style="padding:80px 5%">
+  <div class="cta-box reveal">
+    <div class="section-label" style="display:block;margin-bottom:14px">Empieza hoy</div>
+    <h2>¿Listo para automatizar<br>tu empresa?</h2>
+    <p>Consulta gratuita de 60 minutos. Analizamos tus procesos y te cuento exactamente qué se puede automatizar y cuánto ahorrarías.</p>
+    <a href="/contact.html" class="btn-primary">Reservar consulta gratuita →</a>
+    <p class="guarantee">🛡️ Sin permanencia · Sin letra pequeña · Respondo en menos de 24h</p>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="/js/common.js"></script>
+<script>
+  const phrases = ['Chatbots inteligentes para tus clientes','Automatización de emails y marketing','Integración de todos tus sistemas','Informes automáticos en tiempo real','Procesos internos sin intervención humana'];
+  let pi=0,ci=0,del=false;
+  const tw=document.getElementById('typewriter');
+  function type(){
+    const p=phrases[pi];
+    if(!del){tw.textContent=p.slice(0,ci++);if(ci>p.length){del=true;setTimeout(type,1800);return;}}
+    else{tw.textContent=p.slice(0,ci--);if(ci<0){del=false;pi=(pi+1)%phrases.length;ci=0;}}
+    setTimeout(type,del?38:72);
+  }
+  type();
+</script>
+</body>
+</html>

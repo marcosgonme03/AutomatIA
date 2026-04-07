@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Panel de administración de AutomatIA Pro — Gestiona leads, testimonios y estadísticas">
+<meta property="og:title" content="Dashboard — AutomatIA Pro">
+<meta property="og:description" content="Panel admin profesional para gestionar tu negocio de automatización con IA">
+<meta property="og:image" content="/og-image.png">
+<title>Dashboard — AutomatIA Pro | Panel de Control</title>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<style>
+  body { display: flex; min-height: 100vh; overflow: hidden; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 240px; flex-shrink: 0;
+    background: linear-gradient(180deg, #0a0f1e 0%, #06091f 100%);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 50;
+    transition: transform .3s;
+  }
+  .sidebar-logo { padding: 24px 20px; border-bottom: 1px solid var(--border); }
+  .sidebar-logo a { font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg,var(--primary-light),var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+  .sidebar-logo p { color: var(--muted2); font-size: .72rem; margin-top: 2px; font-family: 'JetBrains Mono',monospace; }
+  .sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 10px; cursor: pointer;
+    color: var(--muted); font-size: .88rem; font-weight: 500;
+    transition: background .2s, color .2s; border: none; background: none;
+    font-family: 'Inter',sans-serif; width: 100%; text-align: left;
+  }
+  .nav-item:hover { background: rgba(124,58,237,.12); color: var(--text); }
+  .nav-item.active { background: rgba(124,58,237,.25); color: var(--primary-light); font-weight: 600; border-left: 2px solid var(--primary-light); }
+  .nav-item .icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+  .nav-section { font-size: .68rem; font-weight: 700; color: var(--muted2); letter-spacing: 2px; text-transform: uppercase; padding: 12px 12px 4px; }
+  .sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--border); }
+  .user-pill { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; background: var(--surface); }
+  .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg,var(--primary),var(--primary-light)); display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 800; flex-shrink: 0; }
+  .user-name { font-size: .82rem; font-weight: 600; }
+  .logout-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: .75rem; margin-top: 6px; width: 100%; text-align: left; padding: 4px 10px; transition: color .2s; font-family: 'Inter',sans-serif; }
+  .logout-btn:hover { color: var(--red); }
+
+  /* ── MAIN ── */
+  .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; overflow: hidden; min-height: 100vh; }
+  .topbar { height: 60px; border-bottom: 1px solid var(--border); padding: 0 28px; display: flex; align-items: center; justify-content: space-between; background: rgba(2,6,23,.85); backdrop-filter: blur(10px); flex-shrink: 0; position: sticky; top: 0; z-index: 40; }
+  .topbar h1 { font-size: 1.05rem; font-weight: 700; margin: 0; }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+  .content { flex: 1; overflow-y: auto; padding: 28px; }
+
+  /* ── VIEWS ── */
+  .view { display: none; }
+  .view.active { display: block; animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ── STAT CARDS ── */
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .scard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+  .scard:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+  .scard::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; }
+  .scard.blue::after   { background: linear-gradient(90deg,var(--primary),var(--primary-light)); }
+  .scard.cyan::after   { background: linear-gradient(90deg,var(--cyan),#06b6d4); }
+  .scard.green::after  { background: linear-gradient(90deg,var(--green),#34d399); }
+  .scard.orange::after { background: linear-gradient(90deg,var(--orange),#fbbf24); }
+  .scard-label { font-size: .75rem; font-weight: 600; color: var(--muted); letter-spacing: .5px; margin-bottom: 8px; text-transform: uppercase; }
+  .scard-num   { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+  .scard-sub   { font-size: .78rem; color: var(--muted2); margin-top: 6px; }
+
+  /* ── TABLE ── */
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
+  .table-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .table-header h3 { font-size: .95rem; font-weight: 700; margin: 0; }
+  .table-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-select, .search-input { background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 8px; font-size: .8rem; font-family: 'Inter',sans-serif; outline: none; cursor: pointer; transition: border-color .2s; }
+  .search-input { width: 180px; }
+  .search-input::placeholder { color: var(--muted2); }
+  .search-input:focus, .filter-select:focus { border-color: var(--primary); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { padding: 10px 16px; text-align: left; font-size: .75rem; font-weight: 700; color: var(--muted); letter-spacing: .5px; text-transform: uppercase; border-bottom: 1px solid var(--border); background: var(--bg2); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  tbody td { padding: 12px 16px; font-size: .85rem; vertical-align: middle; }
+  .td-name { font-weight: 600; }
+  .td-email { color: var(--muted); font-size: .8rem; }
+  .td-company { color: var(--muted); }
+  .td-actions { display: flex; gap: 6px; }
+  .action-btn { background: var(--bg2); border: 1px solid var(--border); color: var(--muted); padding: 5px 10px; border-radius: 7px; font-size: .75rem; cursor: pointer; font-family: 'Inter',sans-serif; transition: all .2s; }
+  .action-btn:hover { border-color: var(--primary); color: var(--primary-light); }
+  .action-btn.danger:hover { border-color: var(--red); color: var(--red); }
+  .status-badge { font-size: .7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+  .status-nuevo { background: rgba(59,130,246,.15); color: #3b82f6; }
+  .status-contactado { background: rgba(168,85,247,.15); color: #a855f7; }
+  .status-cerrado { background: rgba(16,185,129,.15); color: #10b981; }
+  .status-perdido { background: rgba(239,68,68,.15); color: #ef4444; }
+  .pagination { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .pagination span { font-size: .8rem; color: var(--muted); }
+  .pag-btns { display: flex; gap: 6px; }
+  .pag-btn { background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 7px; font-size: .8rem; cursor: pointer; font-family: 'Inter',sans-serif; transition: all .2s; }
+  .pag-btn:hover:not(:disabled) { border-color: var(--primary); color: var(--primary-light); }
+  .pag-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+  /* ── SERVICE CHART ── */
+  .service-chart-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 28px; }
+  .service-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .service-item h4 { font-size: .9rem; font-weight: 600; margin: 0 0 8px 0; }
+  .service-bar { background: var(--bg2); height: 6px; border-radius: 3px; overflow: hidden; }
+  .service-bar-fill { height: 100%; background: linear-gradient(90deg,var(--primary),var(--primary-light)); border-radius: 3px; transition: width .3s ease; }
+  .service-count { font-size: .75rem; color: var(--muted); margin-top: 4px; }
+
+  /* ── TESTI MANAGE ── */
+  .testi-manage-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .testi-manage-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; transition: transform .2s, box-shadow .2s; }
+  .testi-manage-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+  .testi-manage-card .stars { color: #f59e0b; font-size: .85rem; margin-bottom: 8px; }
+  .testi-manage-card p { font-size: .83rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; max-height: 60px; overflow: hidden; }
+  .testi-manage-card .author { font-size: .8rem; font-weight: 600; margin-bottom: 12px; }
+  .testi-manage-card .author span { color: var(--muted); font-weight: 400; }
+  .card-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pub-badge { font-size: .7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+  .pub-on  { background: rgba(16,185,129,.15); color: var(--green); }
+  .pub-off { background: rgba(239,68,68,.15); color: var(--red); }
+
+  /* ── MODAL ── */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.65); backdrop-filter: blur(4px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .modal-overlay.open { display: flex; animation: fadeIn .2s ease; }
+  .modal { background: #0a0f1e; border: 1px solid var(--border); border-radius: 20px; padding: 36px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; animation: slideUp .25s ease; }
+  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .modal h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+  .modal-close { background: none; border: none; font-size: 1.4rem; color: var(--muted); cursor: pointer; }
+  .modal-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; }
+  .form-group label { font-size: .75rem; font-weight: 600; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+  .form-group input, .form-group textarea, .form-group select { background: var(--bg2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; font-family: 'Inter',sans-serif; font-size: .85rem; outline: none; transition: border-color .2s; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); }
+  .modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
+  .btn-primary { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: background .2s; }
+  .btn-primary:hover { background: var(--primary-light); }
+  .btn-secondary { background: var(--bg2); color: var(--text); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-secondary:hover { border-color: var(--muted); }
+
+  /* ── SETTINGS ── */
+  .settings-section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px; margin-bottom: 20px; max-width: 540px; }
+  .settings-section h3 { font-size: 1rem; font-weight: 700; margin: 0 0 20px 0; }
+  .settings-form { display: flex; flex-direction: column; gap: 14px; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+  .empty-state h3 { font-size: 1rem; font-weight: 600; margin: 0 0 8px 0; }
+
+  /* ── SUCCESS MESSAGE ── */
+  .success-toast { position: fixed; bottom: 20px; right: 20px; background: var(--green); color: white; padding: 12px 16px; border-radius: 8px; font-size: .85rem; z-index: 300; animation: slideIn .3s ease; }
+  @keyframes slideIn { from { transform: translateX(400px); } to { transform: none; } }
+
+  /* ── MOBILE ── */
+  .menu-toggle { display: none; background: none; border: none; color: var(--text); font-size: 1.4rem; cursor: pointer; }
+  @media(max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: none; }
+    .main { margin-left: 0; }
+    .menu-toggle { display: block; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .table-wrap { overflow-x: auto; }
+    .modal { max-width: 90vw; padding: 20px; }
+  }
+
+  /* ── LOADING ── */
+  .skeleton { background: var(--surface2); border-radius: 8px; height: 1em; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <a href="/">AutomatIA.pro</a>
+    <p>Panel de administración</p>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Principal</div>
+    <button class="nav-item active" data-view="dashboard"><span class="icon">📊</span> Dashboard</button>
+    <button class="nav-item" data-view="leads"><span class="icon">👥</span> Leads</button>
+    <div class="nav-section">Contenido</div>
+    <button class="nav-item" data-view="testimonials"><span class="icon">💬</span> Testimonios</button>
+    <div class="nav-section">Cuenta</div>
+    <button class="nav-item" data-view="settings"><span class="icon">⚙️</span> Configuración</button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="user-pill">
+      <div class="user-avatar" id="user-avatar">A</div>
+      <div class="user-name" id="user-name">Admin</div>
+    </div>
+    <button class="logout-btn" id="logout-btn">← Cerrar sesión</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:12px">
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <h1 id="view-title">Dashboard</h1>
+    </div>
+    <div class="topbar-actions" id="topbar-actions"></div>
+  </div>
+
+  <div class="content">
+
+    <!-- ── VIEW: DASHBOARD ── -->
+    <div class="view active" id="view-dashboard">
+      <div class="stats-row" id="stats-row">
+        <div class="scard blue"><div class="scard-label">Total leads</div><div class="scard-num" id="s-total">—</div><div class="scard-sub">Desde el inicio</div></div>
+        <div class="scard cyan"><div class="scard-label">Leads hoy</div><div class="scard-num" id="s-today">—</div><div class="scard-sub">Últimas 24h</div></div>
+        <div class="scard green"><div class="scard-label">Esta semana</div><div class="scard-num" id="s-week">—</div><div class="scard-sub">Últimos 7 días</div></div>
+        <div class="scard orange"><div class="scard-label">En proceso</div><div class="scard-num" id="s-active">—</div><div class="scard-sub">Nuevos + contactados</div></div>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-header"><h3>Leads recientes</h3><a href="#" id="goto-all-leads" class="action-btn">Ver todos →</a></div>
+        <table>
+          <thead><tr><th>Nombre</th><th>Email</th><th>Empresa</th><th>Servicio</th><th>Estado</th><th>Fecha</th></tr></thead>
+          <tbody id="recent-tbody"><tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted)">Cargando...</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="service-chart-row" id="service-chart"></div>
+    </div>
+
+    <!-- ── VIEW: LEADS ── -->
+    <div class="view" id="view-leads">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Todos los leads</h3>
+          <div class="table-filters">
+            <input class="search-input" id="leads-search" placeholder="🔍 Buscar...">
+            <select class="filter-select" id="leads-status">
+              <option value="">Todos los estados</option>
+              <option value="nuevo">Nuevo</option>
+              <option value="contactado">Contactado</option>
+              <option value="cerrado">Cerrado</option>
+              <option value="perdido">Perdido</option>
+            </select>
+            <select class="filter-select" id="leads-service">
+              <option value="">Todos los servicios</option>
+              <option value="chatbot">Chatbot</option>
+              <option value="email">Email</option>
+              <option value="documents">Documentos</option>
+              <option value="analytics">Análisis</option>
+              <option value="integrations">Integraciones</option>
+              <option value="processes">Procesos</option>
+              <option value="other">Otro</option>
+            </select>
+            <button class="action-btn" id="export-btn">⬇ Exportar CSV</button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr><th>Nombre</th><th>Email</th><th>Empresa</th><th>Servicio</th><th>Fecha pref.</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="leads-tbody"><tr><td colspan="7" style="text-align:center;padding:28px;color:var(--muted)">Cargando...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <span id="leads-count">0 leads</span>
+          <div class="pag-btns">
+            <button class="pag-btn" id="pag-prev">← Anterior</button>
+            <button class="pag-btn" id="pag-next">Siguiente →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VIEW: TESTIMONIALS ── -->
+    <div class="view" id="view-testimonials">
+      <button class="btn-primary" id="new-testi-btn" style="margin-bottom:20px">+ Nuevo Testimonio</button>
+      <div id="testi-manage-grid" class="testi-manage-grid"></div>
+      <div id="testi-empty" class="empty-state" style="display:none">
+        <h3>📭 Sin testimonios todavía</h3>
+        <p>Crea tu primer testimonio para mostrar en la página pública.</p>
+      </div>
+    </div>
+
+    <!-- ── VIEW: SETTINGS ── -->
+    <div class="view" id="view-settings">
+      <div class="settings-section">
+        <h3>🔐 Cambiar contraseña</h3>
+        <form class="settings-form" id="change-pwd-form">
+          <div class="form-group">
+            <label>Contraseña actual</label>
+            <input type="password" id="current-pwd" required>
+          </div>
+          <div class="form-group">
+            <label>Nueva contraseña</label>
+            <input type="password" id="new-pwd" required>
+          </div>
+          <div class="form-group">
+            <label>Confirmar contraseña</label>
+            <input type="password" id="confirm-pwd" required>
+          </div>
+          <button type="submit" class="btn-primary" style="align-self:flex-start">Actualizar contraseña</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: LEAD DETAIL -->
+<div class="modal-overlay" id="lead-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Detalles del Lead</h3>
+      <button class="modal-close" onclick="document.getElementById('lead-modal').classList.remove('open')">✕</button>
+    </div>
+    <div id="lead-detail-content"></div>
+  </div>
+</div>
+
+<!-- MODAL: NEW/EDIT TESTIMONIAL -->
+<div class="modal-overlay" id="testi-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="testi-modal-title">Nuevo Testimonio</h3>
+      <button class="modal-close" onclick="document.getElementById('testi-modal').classList.remove('open')">✕</button>
+    </div>
+    <form class="modal-form" id="testi-form">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" id="testi-name" required>
+      </div>
+      <div class="form-group">
+        <label>Empresa</label>
+        <input type="text" id="testi-company" required>
+      </div>
+      <div class="form-group">
+        <label>Puesto</label>
+        <input type="text" id="testi-position" required>
+      </div>
+      <div class="form-group">
+        <label>Calificación (1-5)</label>
+        <select id="testi-rating" required>
+          <option value="">Selecciona...</option>
+          <option value="5">⭐⭐⭐⭐⭐ 5 estrellas</option>
+          <option value="4">⭐⭐⭐⭐ 4 estrellas</option>
+          <option value="3">⭐⭐⭐ 3 estrellas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Testimonio</label>
+        <textarea id="testi-text" required rows="4"></textarea>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px">
+          <input type="checkbox" id="testi-published">
+          Publicado
+        </label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="document.getElementById('testi-modal').classList.remove('open')">Cancelar</button>
+        <button type="submit" class="btn-primary">Guardar Testimonio</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+// ── CONFIG ──
+const API_URL = '/api/admin';
+let currentPage = 1;
+let currentFilters = { status: '', service: '', search: '' };
+let currentTesti = null;
+
+// ── AUTH CHECK ──
+async function checkAuth() {
+  const token = localStorage.getItem('admin_token');
+  if (!token) {
+    window.location.href = '/admin/login.html';
+    return false;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/me`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Auth failed');
+    const data = await res.json();
+    document.getElementById('user-avatar').textContent = data.username.substring(0, 1).toUpperCase();
+    document.getElementById('user-name').textContent = data.username;
+    return token;
+  } catch (e) {
+    localStorage.removeItem('admin_token');
+    window.location.href = '/admin/login.html';
+    return false;
+  }
+}
+
+// ── NAVIGATION ──
+document.querySelectorAll('.nav-item').forEach(btn => {
+  btn.addEventListener('click', e => {
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const view = btn.dataset.view;
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(`view-${view}`).classList.add('active');
+    document.getElementById('view-title').textContent =
+      ({ dashboard: 'Dashboard', leads: 'Leads', testimonials: 'Testimonios', settings: 'Configuración' })[view];
+    if (view === 'dashboard') loadDashboard();
+    if (view === 'leads') loadLeads();
+    if (view === 'testimonials') loadTestimonials();
+    closeSidebar();
+  });
+});
+
+// ── DASHBOARD ──
+async function loadDashboard() {
+  const token = localStorage.getItem('admin_token');
+  try {
+    const res = await fetch(`${API_URL}/stats`, { headers: { 'Authorization': `Bearer ${token}` } });
+    const data = await res.json();
+    document.getElementById('s-total').textContent = data.total;
+    document.getElementById('s-today').textContent = data.today;
+    document.getElementById('s-week').textContent = data.week;
+    document.getElementById('s-active').textContent = data.active || 0;
+
+    // Recent leads table
+    const tbody = document.getElementById('recent-tbody');
+    if (data.recent && data.recent.length) {
+      tbody.innerHTML = data.recent.map(l => `
+        <tr style="cursor:pointer" onclick="openLeadDetail('${l.id}')">
+          <td class="td-name">${l.name}</td>
+          <td class="td-email">${l.email}</td>
+          <td class="td-company">${l.company || '—'}</td>
+          <td>${l.service || '—'}</td>
+          <td><span class="status-badge status-${l.status}">${l.status}</span></td>
+          <td>${new Date(l.created_at).toLocaleDateString('es')}</td>
+        </tr>
+      `).join('');
+    } else {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:28px;color:var(--muted)">No hay leads todavía</td></tr>';
+    }
+
+    // Service chart
+    if (data.top_services && data.top_services.length) {
+      const maxCount = Math.max(...data.top_services.map(x => x.count));
+      const chartHTML = data.top_services.map(s => `
+        <div class="service-item">
+          <h4>${s.service}</h4>
+          <div class="service-bar"><div class="service-bar-fill" style="width:${(s.count / maxCount) * 100}%"></div></div>
+          <div class="service-count">${s.count} solicitud${s.count !== 1 ? 'es' : ''}</div>
+        </div>
+      `).join('');
+      document.getElementById('service-chart').innerHTML = chartHTML;
+    }
+  } catch (e) {
+    console.error(e);
+    alert('Error cargando dashboard');
+  }
+}
+
+// ── LEADS ──
+async function loadLeads(page = 1) {
+  const token = localStorage.getItem('admin_token');
+  currentPage = page;
+  const params = new URLSearchParams({ page, ...currentFilters });
+  try {
+    const res = await fetch(`${API_URL}/leads?${params}`, { headers: { 'Authorization': `Bearer ${token}` } });
+    const data = await res.json();
+    const tbody = document.getElementById('leads-tbody');
+    if (data.leads.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--muted)">No hay leads</td></tr>';
+    } else {
+      tbody.innerHTML = data.leads.map(l => `
+        <tr style="cursor:pointer" onclick="openLeadDetail('${l.id}')">
+          <td class="td-name">${l.name}</td>
+          <td class="td-email">${l.email}</td>
+          <td class="td-company">${l.company || '—'}</td>
+          <td>${l.service}</td>
+          <td>${l.preferred_date ? new Date(l.preferred_date).toLocaleDateString('es') : '—'}</td>
+          <td><span class="status-badge status-${l.status}">${l.status}</span></td>
+          <td class="td-actions"><button class="action-btn" onclick="event.stopPropagation();deleteLeadConfirm('${l.id}')" title="Eliminar">🗑</button></td>
+        </tr>
+      `).join('');
+    }
+    document.getElementById('leads-count').textContent = `${data.total} lead${data.total!==1?'s':''}`;
+    document.getElementById('pag-prev').disabled = page === 1;
+    document.getElementById('pag-next').disabled = data.leads.length < 20;
+    document.getElementById('pag-prev').onclick = () => loadLeads(page - 1);
+    document.getElementById('pag-next').onclick = () => loadLeads(page + 1);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+document.getElementById('leads-search').addEventListener('input', e => {
+  currentFilters.search = e.target.value;
+  loadLeads(1);
+});
+document.getElementById('leads-status').addEventListener('change', e => {
+  currentFilters.status = e.target.value;
+  loadLeads(1);
+});
+document.getElementById('leads-service').addEventListener('change', e => {
+  currentFilters.service = e.target.value;
+  loadLeads(1);
+});
+document.getElementById('export-btn').addEventListener('click', async () => {
+  const token = localStorage.getItem('admin_token');
+  try {
+    const res = await fetch(`${API_URL}/leads/export`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Error al exportar');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `leads_${Date.now()}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    showToast('Error al exportar CSV');
+  }
+});
+
+// ── LEAD DETAIL ──
+async function openLeadDetail(id) {
+  const token = localStorage.getItem('admin_token');
+  try {
+    const res = await fetch(`${API_URL}/leads/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+    const lead = await res.json();
+    const content = document.getElementById('lead-detail-content');
+    content.innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:4px">Nombre</div>
+          <div>${lead.name}</div>
+        </div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:4px">Email</div>
+          <div><a href="mailto:${lead.email}" style="color:var(--cyan)">${lead.email}</a></div>
+        </div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:4px">Empresa</div>
+          <div>${lead.company || '—'}</div>
+        </div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:4px">Servicio</div>
+          <div>${lead.service}</div>
+        </div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:4px">Estado</div>
+          <select class="status-badge status-${lead.status}" onchange="updateLeadStatus('${id}', this.value)" style="background:transparent;border:none;padding:4px;cursor:pointer;font-weight:700">
+            <option value="nuevo" ${lead.status==='nuevo'?'selected':''}>Nuevo</option>
+            <option value="contactado" ${lead.status==='contactado'?'selected':''}>Contactado</option>
+            <option value="cerrado" ${lead.status==='cerrado'?'selected':''}>Cerrado</option>
+            <option value="perdido" ${lead.status==='perdido'?'selected':''}>Perdido</option>
+          </select>
+        </div>
+        <div>
+          <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:4px">Fecha preferida</div>
+          <div>${lead.preferred_date ? new Date(lead.preferred_date).toLocaleDateString('es') : '—'}</div>
+        </div>
+      </div>
+      ${lead.message ? `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:20px"><div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:8px">Mensaje</div><div style="font-size:.85rem;line-height:1.6">${lead.message}</div></div>` : ''}
+      <div>
+        <div style="font-size:.75rem;color:var(--muted);text-transform:uppercase;font-weight:700;margin-bottom:8px">Notas internas</div>
+        <textarea id="lead-notes" style="width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px;color:var(--text);font-family:'Inter',sans-serif;min-height:100px;outline:none">${lead.notes || ''}</textarea>
+      </div>
+      <div style="margin-top:20px;display:flex;gap:10px">
+        <button onclick="updateLeadNotes('${id}')" class="btn-primary">Guardar notas</button>
+        <button onclick="deleteLead('${id}')" class="btn-secondary" style="color:var(--red)">Eliminar lead</button>
+      </div>
+    `;
+    document.getElementById('lead-modal').classList.add('open');
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function updateLeadStatus(id, status) {
+  const token = localStorage.getItem('admin_token');
+  try {
+    await fetch(`${API_URL}/leads/${id}`, {
+      method: 'PATCH',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    showToast('Estado actualizado ✓');
+    loadLeads(currentPage);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function updateLeadNotes(id) {
+  const token = localStorage.getItem('admin_token');
+  const notes = document.getElementById('lead-notes').value;
+  try {
+    await fetch(`${API_URL}/leads/${id}`, {
+      method: 'PATCH',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes })
+    });
+    showToast('Notas guardadas ✓');
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function deleteLeadConfirm(id) {
+  if (confirm('¿Estás seguro que quieres eliminar este lead?')) {
+    await deleteLead(id);
+  }
+}
+
+async function deleteLead(id) {
+  const token = localStorage.getItem('admin_token');
+  try {
+    await fetch(`${API_URL}/leads/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    document.getElementById('lead-modal').classList.remove('open');
+    showToast('Lead eliminado ✓');
+    loadLeads(currentPage);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+// ── TESTIMONIALS ──
+async function loadTestimonials() {
+  const token = localStorage.getItem('admin_token');
+  try {
+    const res = await fetch(`${API_URL}/testimonials`, { headers: { 'Authorization': `Bearer ${token}` } });
+    const testimonials = await res.json();
+    const grid = document.getElementById('testi-manage-grid');
+    const empty = document.getElementById('testi-empty');
+
+    if (testimonials.length === 0) {
+      grid.style.display = 'none';
+      empty.style.display = 'block';
+    } else {
+      grid.style.display = 'grid';
+      empty.style.display = 'none';
+      grid.innerHTML = testimonials.map(t => `
+        <div class="testi-manage-card">
+          <div class="stars">${'⭐'.repeat(t.stars || 0)}</div>
+          <p>"${t.content}"</p>
+          <div class="author">${t.name}<br><span>${t.company || ''} • ${t.role || ''}</span></div>
+          <div class="card-actions">
+            <span class="pub-badge ${t.published ? 'pub-on' : 'pub-off'}">${t.published ? '✓ Publicado' : '○ Borrador'}</span>
+            <button class="action-btn" onclick="editTesti('${t.id}')">✏️ Editar</button>
+            <button class="action-btn danger" onclick="deleteTesti('${t.id}')">🗑 Eliminar</button>
+          </div>
+        </div>
+      `).join('');
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+document.getElementById('new-testi-btn').addEventListener('click', () => {
+  currentTesti = null;
+  document.getElementById('testi-modal-title').textContent = 'Nuevo Testimonio';
+  document.getElementById('testi-form').reset();
+  document.getElementById('testi-modal').classList.add('open');
+});
+
+async function editTesti(id) {
+  const token = localStorage.getItem('admin_token');
+  try {
+    const res = await fetch(`${API_URL}/testimonials/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+    const t = await res.json();
+    currentTesti = id;
+    document.getElementById('testi-modal-title').textContent = 'Editar Testimonio';
+    document.getElementById('testi-name').value = t.name;
+    document.getElementById('testi-company').value = t.company || '';
+    document.getElementById('testi-position').value = t.role || '';
+    document.getElementById('testi-rating').value = t.stars || 5;
+    document.getElementById('testi-text').value = t.content || '';
+    document.getElementById('testi-published').checked = t.published;
+    document.getElementById('testi-modal').classList.add('open');
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+document.getElementById('testi-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const token = localStorage.getItem('admin_token');
+  const data = {
+    name: document.getElementById('testi-name').value,
+    company: document.getElementById('testi-company').value,
+    role: document.getElementById('testi-position').value,
+    stars: parseInt(document.getElementById('testi-rating').value),
+    content: document.getElementById('testi-text').value,
+    published: document.getElementById('testi-published').checked ? 1 : 0
+  };
+
+  try {
+    const method = currentTesti ? 'PATCH' : 'POST';
+    const url = currentTesti ? `${API_URL}/testimonials/${currentTesti}` : `${API_URL}/testimonials`;
+    const res = await fetch(url, {
+      method,
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (res.ok) {
+      showToast('Testimonio guardado ✓');
+      document.getElementById('testi-modal').classList.remove('open');
+      loadTestimonials();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+async function deleteTesti(id) {
+  if (confirm('¿Eliminar este testimonio?')) {
+    const token = localStorage.getItem('admin_token');
+    try {
+      await fetch(`${API_URL}/testimonials/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      showToast('Testimonio eliminado ✓');
+      loadTestimonials();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
+
+// ── SETTINGS ──
+document.getElementById('change-pwd-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const current = document.getElementById('current-pwd').value;
+  const newPwd = document.getElementById('new-pwd').value;
+  const confirm = document.getElementById('confirm-pwd').value;
+
+  if (newPwd !== confirm) {
+    alert('Las contraseñas no coinciden');
+    return;
+  }
+
+  const token = localStorage.getItem('admin_token');
+  try {
+    const res = await fetch(`${API_URL}/change-password`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ current_password: current, new_password: newPwd })
+    });
+    if (res.ok) {
+      showToast('Contraseña actualizada ✓');
+      document.getElementById('change-pwd-form').reset();
+    } else {
+      alert('Contraseña actual incorrecta');
+    }
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+// ── LOGOUT ──
+document.getElementById('logout-btn').addEventListener('click', () => {
+  localStorage.removeItem('admin_token');
+  window.location.href = '/admin/login.html';
+});
+
+// ── SIDEBAR TOGGLE ──
+document.getElementById('menu-toggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+// ── MODAL CLOSE ON BACKDROP CLICK ──
+document.getElementById('lead-modal').addEventListener('click', e => {
+  if (e.target.id === 'lead-modal') {
+    document.getElementById('lead-modal').classList.remove('open');
+  }
+});
+document.getElementById('testi-modal').addEventListener('click', e => {
+  if (e.target.id === 'testi-modal') {
+    document.getElementById('testi-modal').classList.remove('open');
+  }
+});
+
+// ── TOAST ──
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.className = 'success-toast';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ── INIT ──
+checkAuth().then(() => loadDashboard());
+document.getElementById('goto-all-leads').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector('[data-view="leads"]').click();
+  loadLeads(1);
+});
+</script>
+</body>
+</html>

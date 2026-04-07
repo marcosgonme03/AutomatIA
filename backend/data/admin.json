@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "created_at": "2026-04-07T09:50:11.411Z",
+    "username": "admin",
+    "password_hash": "$2a$10$RXr8aPwhXPJwGTqzE2MSQ.0/lNHaio3mt3D60gAJ8I88KU4ovCata",
+    "email_notifications": 1
+  }
+]

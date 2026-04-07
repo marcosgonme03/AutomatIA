@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "created_at": "2026-04-07T09:50:11.420Z",
+    "name": "María Castro",
+    "role": "CEO",
+    "company": "Tienda online de moda",
+    "content": "Ahorramos 15 horas semanales en gestión de pedidos. El chatbot atiende a nuestros clientes mejor que algunos empleados y nunca descansa. Increíble ROI en solo 2 meses.",
+    "stars": 5,
+    "initials": "MC",
+    "color": "purple",
+    "published": 1,
+    "sort_order": 1
+  },
+  {
+    "id": 2,
+    "created_at": "2026-04-07T09:50:11.422Z",
+    "name": "Javier Romero",
+    "role": "Director Comercial",
+    "company": "Consultoría B2B",
+    "content": "Integraron nuestro CRM con la facturación y el email en una semana. Lo que antes nos llevaba 3 horas al día ahora es automático. El equipo puede centrarse en vender.",
+    "stars": 5,
+    "initials": "JR",
+    "color": "cyan",
+    "published": 1,
+    "sort_order": 2
+  },
+  {
+    "id": 3,
+    "created_at": "2026-04-07T09:50:11.422Z",
+    "name": "Laura Méndez",
+    "role": "COO",
+    "company": "Clínica dental",
+    "content": "Los informes que generábamos manualmente cada semana ahora se hacen solos. Tenemos datos en tiempo real y hemos mejorado la toma de decisiones enormemente.",
+    "stars": 5,
+    "initials": "LM",
+    "color": "green",
+    "published": 1,
+    "sort_order": 3
+  },
+  {
+    "id": 4,
+    "created_at": "2026-04-07T09:50:11.423Z",
+    "name": "Roberto Sánchez",
+    "role": "Gerente",
+    "company": "Agencia de marketing",
+    "content": "El sistema de automatización de emails multiplicó por 3 nuestra tasa de conversión. En 6 semanas recuperamos toda la inversión. Totalmente recomendable.",
+    "stars": 5,
+    "initials": "RS",
+    "color": "orange",
+    "published": 1,
+    "sort_order": 4
+  }
+]

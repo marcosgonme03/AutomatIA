@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx uipro-cli:*)",
+      "Bash(mkdir -p \"/c/Users/marco/.claude/skills\")",
+      "Bash(cp -r \".claude/skills/ui-ux-pro-max\" \"/c/Users/marco/.claude/skills/\")",
+      "Bash(claude mcp:*)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npm install:*)"
+    ]
+  }
+}
