@@ -3,25 +3,26 @@
 // ── NAV & FOOTER INJECTION ──────────────────────────
 (function () {
   const path = window.location.pathname;
+  const BASE = '/AutomatIA';
 
   function isActive(href) {
-    if (href === '/' || href === '/index.html') return path === '/' || path === '/index.html';
+    if (href === BASE + '/' || href === BASE + '/index.html') return path === BASE + '/' || path === BASE + '/index.html' || path === BASE;
     return path.includes(href.replace('.html', ''));
   }
 
   const links = [
-    { href: '/services.html', label: 'Servicios' },
-    { href: '/process.html', label: 'Proceso' },
-    { href: '/results.html', label: 'Resultados' },
-    { href: '/clients.html', label: 'Clientes' },
+    { href: BASE + '/services.html', label: 'Servicios' },
+    { href: BASE + '/process.html', label: 'Proceso' },
+    { href: BASE + '/results.html', label: 'Resultados' },
+    { href: BASE + '/clients.html', label: 'Clientes' },
   ];
 
   const navHTML = `
     <nav id="main-nav">
-      <div class="logo"><a href="/"><span>Auto</span>matIA<span>.pro</span></a></div>
+      <div class="logo"><a href="${BASE}/"><span>Auto</span>matIA<span>.pro</span></a></div>
       <ul class="nav-links">
         ${links.map(l => `<li><a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a></li>`).join('')}
-        <li><a href="/contact.html" class="nav-cta${isActive('/contact.html') ? ' active' : ''}">Consulta gratis →</a></li>
+        <li><a href="${BASE}/contact.html" class="nav-cta${isActive(BASE + '/contact.html') ? ' active' : ''}">Consulta gratis →</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -29,18 +30,18 @@
     </nav>
     <div class="mobile-menu" id="mobile-menu">
       ${links.map(l => `<a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a>`).join('')}
-      <a href="/contact.html" class="nav-cta" style="text-align:center;margin-top:8px">Consulta gratis →</a>
+      <a href="${BASE}/contact.html" class="nav-cta" style="text-align:center;margin-top:8px">Consulta gratis →</a>
     </div>`;
 
   const footerHTML = `
     <footer>
-      <div class="footer-logo"><a href="/"><span>Auto</span>matIA<span>.pro</span></a></div>
+      <div class="footer-logo"><a href="${BASE}/"><span>Auto</span>matIA<span>.pro</span></a></div>
       <p>© ${new Date().getFullYear()} AutomatIA Pro · Automatización con IA para PYMEs</p>
       <div class="footer-links">
-        <a href="/privacy.html">Privacidad</a>
-        <a href="/legal.html">Aviso legal</a>
-        <a href="/contact.html">Contacto</a>
-        <a href="/admin/login.html" style="opacity:.4">Admin</a>
+        <a href="${BASE}/privacy.html">Privacidad</a>
+        <a href="${BASE}/legal.html">Aviso legal</a>
+        <a href="${BASE}/contact.html">Contacto</a>
+        <a href="${BASE}/admin/login.html" style="opacity:.4">Admin</a>
       </div>
     </footer>`;
 

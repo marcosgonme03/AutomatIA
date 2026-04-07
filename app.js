@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// ── Debug log to file (stderr.log can be unreliable in Passenger) ──
+// ── Debug log ──
 const LOG_FILE = path.join(__dirname, 'app-debug.log');
 function log(msg) {
   const line = `[${new Date().toISOString()}] ${msg}\n`;
@@ -15,7 +15,6 @@ log('NODE_ENV: ' + process.env.NODE_ENV);
 log('PORT env: ' + process.env.PORT);
 
 try {
-  // ── Load env ──
   require('dotenv').config({ path: path.join(__dirname, '.env') });
   log('.env loaded OK');
 
@@ -27,17 +26,23 @@ try {
 
   const app = express();
   const PORT = process.env.PORT || 3000;
+  const BASE = '/AutomatIA';
 
-  // Init database
   initDB();
   log('DB initialized OK');
 
-  // Middleware
+  // ── Strip /AutomatIA prefix so Express routes match ──
+  app.use((req, res, next) => {
+    if (req.url.startsWith(BASE)) {
+      req.url = req.url.slice(BASE.length) || '/';
+    }
+    next();
+  });
+
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.static(path.join(__dirname, 'frontend')));
 
-  // Rate limiting
   const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
   const contactLimiter = rateLimit({
     windowMs: 60 * 60 * 1000,
@@ -47,17 +52,14 @@ try {
 
   app.use('/api/', apiLimiter);
 
-  // Routes
   app.use('/api/contact', contactLimiter, require('./backend/routes/contact'));
   app.use('/api/testimonials', require('./backend/routes/testimonials'));
   app.use('/api/admin', require('./backend/routes/admin'));
 
   log('Routes loaded OK');
 
-  // SPA fallback for admin
-  app.get('/admin', (req, res) => res.redirect('/admin/login.html'));
+  app.get('/admin', (req, res) => res.redirect(BASE + '/admin/login.html'));
 
-  // Health check
   app.get('/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));
 
   app.listen(PORT, () => {
@@ -70,7 +72,6 @@ try {
   log('FATAL ERROR: ' + err.message);
   log(err.stack);
 
-  // Fallback: show error in browser
   const http = require('http');
   http.createServer((req, res) => {
     res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });

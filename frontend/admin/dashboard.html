@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -6,9 +6,9 @@
 <meta name="description" content="Panel de administración de AutomatIA Pro — Gestiona leads, testimonios y estadísticas">
 <meta property="og:title" content="Dashboard — AutomatIA Pro">
 <meta property="og:description" content="Panel admin profesional para gestionar tu negocio de automatización con IA">
-<meta property="og:image" content="/og-image.png">
+<meta property="og:image" content="/AutomatIA/og-image.png">
 <title>Dashboard — AutomatIA Pro | Panel de Control</title>
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/AutomatIA/css/main.css">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
 <style>
   body { display: flex; min-height: 100vh; overflow: hidden; }
@@ -179,7 +179,7 @@
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-logo">
-    <a href="/">AutomatIA.pro</a>
+    <a href="/AutomatIA/">AutomatIA.pro</a>
     <p>Panel de administración</p>
   </div>
   <nav class="sidebar-nav">
@@ -369,7 +369,7 @@
 
 <script>
 // ── CONFIG ──
-const API_URL = '/api/admin';
+const API_URL = '/AutomatIA/api/admin';
 let currentPage = 1;
 let currentFilters = { status: '', service: '', search: '' };
 let currentTesti = null;
@@ -378,7 +378,7 @@ let currentTesti = null;
 async function checkAuth() {
   const token = localStorage.getItem('admin_token');
   if (!token) {
-    window.location.href = '/admin/login.html';
+    window.location.href = '/AutomatIA/admin/login.html';
     return false;
   }
 
@@ -393,7 +393,7 @@ async function checkAuth() {
     return token;
   } catch (e) {
     localStorage.removeItem('admin_token');
-    window.location.href = '/admin/login.html';
+    window.location.href = '/AutomatIA/admin/login.html';
     return false;
   }
 }
@@ -772,7 +772,7 @@ document.getElementById('change-pwd-form').addEventListener('submit', async e =>
 // ── LOGOUT ──
 document.getElementById('logout-btn').addEventListener('click', () => {
   localStorage.removeItem('admin_token');
-  window.location.href = '/admin/login.html';
+  window.location.href = '/AutomatIA/admin/login.html';
 });
 
 // ── SIDEBAR TOGGLE ──
