@@ -72,6 +72,9 @@ try {
   log('Routes loaded');
 
   // Admin redirect
+  // Root → redirect to /AutomatIA/
+  app.get('/', (req, res) => res.redirect('/AutomatIA/'));
+
   app.get('/admin', (req, res) => res.redirect('/AutomatIA/admin/login.html'));
 
   // Health check
