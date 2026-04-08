@@ -430,5 +430,23 @@
     calc();
   })();
 </script>
+
+<!-- Calendly Widget -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+  window.Calendly = window.Calendly || {};
+  window.addEventListener('load', function() {
+    // Calendly - Floating button disponible
+    if (window.Calendly && window.Calendly.showPopupWidget) {
+      // Optional: Pre-load para mejorar performance
+      window.Calendly.showPopupWidget('https://calendly.com/marcoscode');
+    }
+  });
+</script>
+
+<!-- Tidio Live Chat -->
+<script src="//code.tidio.co/TIDIO_CHAT_ID.js" async></script>
+
 </body>
 </html>

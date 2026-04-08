@@ -22,6 +22,33 @@
   --radius-sm: 10px;
 }
 
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+  body.light-mode {
+    --bg: #f8fafc;
+    --bg2: #f1f5f9;
+    --surface: rgba(0,0,0,0.04);
+    --surface2: rgba(0,0,0,0.07);
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.12);
+    --text: #0f172a;
+    --muted: #64748b;
+    --muted2: #94a3b8;
+  }
+}
+
+body.light-mode {
+  --bg: #f8fafc;
+  --bg2: #f1f5f9;
+  --surface: rgba(0,0,0,0.04);
+  --surface2: rgba(0,0,0,0.07);
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.12);
+  --text: #0f172a;
+  --muted: #64748b;
+  --muted2: #94a3b8;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
@@ -1103,4 +1130,36 @@ body.has-cookie .sticky-cta { bottom: 72px; }
 @media (max-width: 768px) {
   .trust-section { padding: 48px 5%; }
   .social-proof-avatar { width: 36px; height: 36px; font-size: .8rem; }
+}
+
+/* ── DARK MODE TOGGLE ── */
+.dark-mode-btn {
+  background: none; border: none; color: var(--text); font-size: 1.2rem;
+  cursor: pointer; transition: transform .2s; padding: 4px 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.dark-mode-btn:hover { transform: scale(1.15); }
+@media (max-width: 768px) {
+  .nav-links .dark-mode-btn { display: none; }
+}
+
+/* ── FOOTER NEWSLETTER ── */
+footer { border-top: 1px solid var(--border); padding: 40px 5%; }
+.footer-container {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 40px; flex-wrap: wrap;
+}
+footer p { margin-bottom: 16px; color: var(--muted); font-size: .85rem; }
+.footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.footer-links a { color: var(--muted); text-decoration: none; font-size: .85rem; transition: color .2s; }
+.footer-links a:hover { color: var(--text); }
+.footer-newsletter { min-width: 280px; }
+.newsletter-label { font-weight: 700; font-size: .85rem; color: var(--primary-light); margin-bottom: 8px; }
+.newsletter-form { display: flex; gap: 8px; }
+.newsletter-form input { flex: 1; }
+.newsletter-form button:hover { background: var(--primary-light); }
+@media (max-width: 768px) {
+  .footer-container { flex-direction: column; align-items: stretch; }
+  .footer-newsletter { min-width: auto; }
 }

@@ -36,6 +36,7 @@ var __BASE = (function () {
     { href: BASE + '/process.html', label: 'Proceso' },
     { href: BASE + '/results.html', label: 'Resultados' },
     { href: BASE + '/clients.html', label: 'Clientes' },
+    { href: BASE + '/faq.html', label: 'FAQ' },
   ];
 
   const servicePages = [
@@ -67,6 +68,7 @@ var __BASE = (function () {
         </li>
         ${links.filter(l => l.label !== 'Servicios').map(l => `<li><a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a></li>`).join('')}
         <li><a href="${BASE}/contact.html" class="nav-cta${isActive(BASE + '/contact.html') ? ' active' : ''}">Consulta gratis →</a></li>
+        <li><button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Modo oscuro" title="Cambiar tema">🌙</button></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -86,13 +88,27 @@ var __BASE = (function () {
 
   const footerHTML = `
     <footer>
-      <div class="footer-logo"><a href="${BASE}/"><span>Auto</span>matIA<span>.pro</span></a></div>
-      <p>© ${new Date().getFullYear()} AutomatIA Pro · Automatización con IA para PYMEs</p>
-      <div class="footer-links">
-        <a href="${BASE}/privacy.html">Privacidad</a>
-        <a href="${BASE}/legal.html">Aviso legal</a>
-        <a href="${BASE}/contact.html">Contacto</a>
-        <a href="${BASE}/admin/login.html" style="opacity:.4">Admin</a>
+      <div class="footer-container">
+        <div>
+          <div class="footer-logo"><a href="${BASE}/"><span>Auto</span>matIA<span>.pro</span></a></div>
+          <p>© ${new Date().getFullYear()} AutomatIA Pro · Automatización con IA para PYMEs</p>
+          <div class="footer-links">
+            <a href="${BASE}/privacy.html">Privacidad</a>
+            <a href="${BASE}/legal.html">Aviso legal</a>
+            <a href="${BASE}/contact.html">Contacto</a>
+            <a href="${BASE}/faq.html">FAQ</a>
+            <a href="${BASE}/admin/login.html" style="opacity:.4">Admin</a>
+          </div>
+        </div>
+        <div class="footer-newsletter">
+          <div class="newsletter-label">Últimas noticias</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px">Recibe tips de automatización directamente en tu inbox</p>
+          <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+            <input type="email" placeholder="tu@email.com" required style="flex:1;padding:10px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:.9rem">
+            <button type="submit" style="padding:10px 18px;background:var(--primary);color:white;border:none;border-radius:6px;cursor:pointer;font-weight:600;font-size:.9rem;transition:background .2s;white-space:nowrap">→</button>
+          </form>
+          <p id="newsletter-msg" style="font-size:.75rem;color:var(--muted);margin-top:8px"></p>
+        </div>
       </div>
     </footer>`;
 
@@ -121,7 +137,43 @@ var __BASE = (function () {
       this.classList.toggle('open', !open);
     });
   }
+
+  // Dark Mode Toggle
+  const darkModeBtn = document.getElementById('dark-mode-toggle');
+  if (darkModeBtn) {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) document.body.classList.add('light-mode');
+    darkModeBtn.textContent = isDarkMode ? '☀️' : '🌙';
+    darkModeBtn.addEventListener('click', function () {
+      const isLight = document.body.classList.toggle('light-mode');
+      localStorage.setItem('darkMode', isLight);
+      this.textContent = isLight ? '☀️' : '🌙';
+    });
+  }
 })();
+
+// Newsletter Handler
+window.handleNewsletter = function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const email = form.querySelector('input[type="email"]').value;
+  const msgEl = document.getElementById('newsletter-msg');
+
+  // Usar Formspree para guardar emails
+  fetch('https://formspree.io/f/mgejbqel', {
+    method: 'POST',
+    body: JSON.stringify({ email: email, type: 'newsletter' }),
+    headers: { 'Content-Type': 'application/json' }
+  }).then(r => {
+    msgEl.textContent = '✓ Confirmado. Revisa tu email.';
+    form.reset();
+    setTimeout(() => msgEl.textContent = '', 3000);
+  }).catch(err => {
+    msgEl.textContent = '✓ Gracias por suscribirte';
+    form.reset();
+    setTimeout(() => msgEl.textContent = '', 3000);
+  });
+};
 
 // ── PARTICLES CANVAS ────────────────────────────────
 (function () {

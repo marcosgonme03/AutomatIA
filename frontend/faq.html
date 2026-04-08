@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Preguntas frecuentes sobre AutomatIA Pro - Automatización con IA para PYMEs. Resuelve tus dudas sobre nuestros servicios.">
+<meta name="keywords" content="FAQ, preguntas frecuentes, automatización IA, soporte">
+<title>FAQ - AutomatIA Pro | Preguntas Frecuentes</title>
+<link rel="stylesheet" href="./css/main.css">
+<style>
+  #faq-hero {
+    min-height: 60vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 100px 5% 60px;
+    background: var(--bg2);
+  }
+  #faq-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700; margin-bottom: 20px;
+  }
+  #faq-hero p {
+    color: var(--muted); font-size: 1.05rem; max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  .faq-container { max-width: 700px; margin: 0 auto; padding: 40px 5%; }
+  .faq-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); margin-bottom: 16px;
+    transition: border-color .3s;
+  }
+  .faq-item.open { border-color: var(--primary); }
+  .faq-question {
+    background: transparent; border: none; width: 100%;
+    padding: 20px; text-align: left; cursor: pointer;
+    font-size: 1rem; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; justify-content: space-between;
+    transition: color .2s;
+  }
+  .faq-question:hover { color: var(--primary-light); }
+  .faq-icon {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; margin-left: 12px;
+    transition: transform .3s;
+  }
+  .faq-item.open .faq-icon { transform: rotate(180deg); }
+  .faq-answer {
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+    padding: 0 20px; color: var(--muted); font-size: .95rem; line-height: 1.7;
+  }
+  .faq-item.open .faq-answer { max-height: 500px; padding: 0 20px 20px; }
+  .faq-cta {
+    text-align: center; padding: 60px 5% 40px;
+    border-top: 1px solid var(--border);
+  }
+  .faq-cta h2 { font-size: 1.5rem; margin-bottom: 12px; }
+  .faq-cta p { color: var(--muted); margin-bottom: 24px; }
+  .btn {
+    display: inline-block; padding: 12px 32px;
+    background: var(--primary); color: white;
+    border-radius: var(--radius-sm); text-decoration: none;
+    transition: background .3s; border: none; cursor: pointer;
+    font-weight: 600; font-size: .95rem;
+  }
+  .btn:hover { background: var(--primary-light); }
+</style>
+</head>
+<body>
+<div id="nav-placeholder"></div>
+<canvas id="canvas"></canvas>
+<div class="grid-bg"></div>
+
+<section id="faq-hero">
+  <h1>Preguntas Frecuentes</h1>
+  <p>Encuentra respuestas a las preguntas más comunes sobre AutomatIA Pro y nuestros servicios</p>
+</section>
+
+<div class="faq-container">
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Qué es AutomatIA Pro?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      AutomatIA Pro es una consultoría especializada en automatización e inteligencia artificial para PYMEs. Ayudamos a empresas a automatizar procesos, reducir costes y escalar sin necesidad de contratar más personal.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Cuánto cuesta un proyecto?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      El precio depende del alcance y complejidad del proyecto. Hacemos un diagnóstico personalizado sin costo para entender tus necesidades y ofrecerte una propuesta ajustada. Desde pequeñas automatizaciones hasta soluciones complejas con IA.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Cuánto tiempo tarda un proyecto típico?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      Depende de la complejidad. Proyectos pequeños (2-4 semanas), medianos (1-2 meses), complejos (2-3 meses). En la consulta inicial definimos el cronograma exacto para tu caso.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Necesito conocimientos técnicos?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      No. Nos encargamos de todo lo técnico. Tu rol es indicarnos qué procesos quieres automatizar. Después te proporcionamos documentación completa y capacitamos a tu equipo.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Integramos con mis sistemas actuales?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      Sí. Integramos con prácticamente cualquier sistema (CRM, ERP, contabilidad, email, etc.). Si es estándar, lo integramos sin problemas. Si es custom, evaluamos opciones en la consulta inicial.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Qué pasa después de terminar el proyecto?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      Incluimos documentación completa y capacitación de tu equipo. Ofrecemos soporte técnico post-proyecto para asegurar que todo funciona correctamente. También disponibles para mejoras futuras.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Es seguro automatizar procesos sensibles?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      Totalmente. Implementamos medidas de seguridad estrictas: encriptación, autenticación, logs de auditoría, y cumplimiento con RGPD/CCPA. Cada proyecto incluye un análisis de seguridad.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Podemos cambiar o mejorar la automatización después?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      Sí, claro. Los sistemas son modulares y flexibles. Podemos ajustar, expandir o mejorar cualquier parte. Recomendamos revisiones periódicas (3-6 meses) para optimizar resultados.
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question">
+      <span>¿Ofrecen consultoría sin compromiso?</span>
+      <span class="faq-icon">▼</span>
+    </button>
+    <div class="faq-answer">
+      Sí. La consulta inicial es completamente gratuita. Analizamos tu situación, identificamos oportunidades de automatización y presentamos opciones sin ningún compromiso.
+    </div>
+  </div>
+</div>
+
+<section class="faq-cta">
+  <h2>¿Todavía tienes preguntas?</h2>
+  <p>Agendar una consulta gratuita con nuestro equipo</p>
+  <a href="./contact.html" class="btn">Agendar consulta</a>
+</section>
+
+<div id="footer-placeholder"></div>
+
+<script>
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', function() {
+    const item = this.parentElement;
+    const isOpen = item.classList.contains('open');
+    // Cerrar todos
+    document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+    // Abrir el clickeado
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+
+<script src="./js/common.js"></script>
+</body>
+</html>
