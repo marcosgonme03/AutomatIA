@@ -68,7 +68,6 @@ var __BASE = (function () {
         </li>
         ${links.filter(l => l.label !== 'Servicios').map(l => `<li><a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a></li>`).join('')}
         <li><a href="${BASE}/contact.html" class="nav-cta${isActive(BASE + '/contact.html') ? ' active' : ''}">Consulta gratis →</a></li>
-        <li><button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Modo oscuro" title="Cambiar tema">🌙</button></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menú">
         <span></span><span></span><span></span>
@@ -138,18 +137,6 @@ var __BASE = (function () {
     });
   }
 
-  // Dark Mode Toggle
-  const darkModeBtn = document.getElementById('dark-mode-toggle');
-  if (darkModeBtn) {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    if (isDarkMode) document.body.classList.add('light-mode');
-    darkModeBtn.textContent = isDarkMode ? '☀️' : '🌙';
-    darkModeBtn.addEventListener('click', function () {
-      const isLight = document.body.classList.toggle('light-mode');
-      localStorage.setItem('darkMode', isLight);
-      this.textContent = isLight ? '☀️' : '🌙';
-    });
-  }
 })();
 
 // Newsletter Handler
