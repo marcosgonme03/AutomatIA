@@ -3,7 +3,7 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://automatia.pro/sitemap.xml
+Sitemap: https://automatia.marcoscode.com/sitemap.xml
 
 # Google
 User-agent: Googlebot

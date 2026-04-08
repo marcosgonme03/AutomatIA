@@ -1,5 +1,6 @@
 # AutomatIA Pro — cPanel Static Deployment
-# Subir contenido de frontend/ a public_html/automatia/
+# Subir contenido de frontend/ a public_html/AutomatIA/
+# Subdominio automatia.marcoscode.com → Document Root: public_html/AutomatIA
 
 # Force HTTPS
 RewriteEngine On
@@ -7,7 +8,7 @@ RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Custom 404
-ErrorDocument 404 /automatia/404.html
+ErrorDocument 404 /404.html
 
 # Security headers
 <IfModule mod_headers.c>

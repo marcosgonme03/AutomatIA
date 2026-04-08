@@ -3,7 +3,11 @@
 // Auto-detect base path (works on Vercel, cPanel, localhost)
 var __BASE = (function () {
   var s = document.querySelector('script[src*="common.js"]');
-  if (s) return s.getAttribute('src').replace(/\/js\/common\.js.*$/, '');
+  if (s) {
+    var src = s.getAttribute('src');
+    // Handle both ./js/common.js and ../js/common.js and /path/js/common.js
+    return src.replace(/\/?js\/common\.js.*$/, '').replace(/\/$/, '') || '.';
+  }
   return '.';
 })();
 
