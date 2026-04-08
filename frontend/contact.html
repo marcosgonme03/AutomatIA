@@ -7,11 +7,11 @@
 <meta name="keywords" content="contacto, consulta gratis, automatización, IA, consultoría">
 <meta property="og:title" content="Contacto — AutomatIA Pro">
 <meta property="og:description" content="Solicita tu consulta gratuita de automatización con IA">
-<meta property="og:image" content="/AutomatIA/og-image.png">
+<meta property="og:image" content="./og-image.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
 <link rel="canonical" href="https://automatia.pro/contact.html">
 <title>Contacto — Solicita tu Consulta Gratuita | AutomatIA Pro</title>
-<link rel="stylesheet" href="/AutomatIA/css/main.css">
+<link rel="stylesheet" href="./css/main.css">
 <style>
   .contact-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; max-width: 1100px; margin: 0 auto; }
   @media(max-width:900px){ .contact-wrap { grid-template-columns: 1fr; } }
@@ -152,11 +152,19 @@
           <select id="service" name="service">
             <option value="">Selecciona...</option>
             <option value="chatbot">Chatbot con IA</option>
+            <option value="sales-agent">Agente de Ventas con IA</option>
+            <option value="voice-assistant">Asistente de Voz con IA</option>
             <option value="email">Email & Marketing Automatizado</option>
             <option value="documents">Generación de Documentos</option>
             <option value="analytics">Análisis e Informes</option>
             <option value="integrations">Integración de Sistemas</option>
             <option value="processes">Automatización Interna</option>
+            <option value="onboarding">Automatización de Onboarding</option>
+            <option value="payments">Automatización de Cobros</option>
+            <option value="content">Generación de Contenido IA</option>
+            <option value="workshop">Formación IA para Equipos</option>
+            <option value="maintenance">Plan de Mantenimiento</option>
+            <option value="audit">Auditoría Gratuita</option>
             <option value="other">Otro / No sé todavía</option>
           </select>
         </div>
@@ -197,7 +205,7 @@
 </section>
 
 <div id="footer-placeholder"></div>
-<script src="/AutomatIA/js/common.js"></script>
+<script src="./js/common.js"></script>
 <script>
   // Set min date to tomorrow
   const dateInput = document.getElementById('preferred_date');
@@ -242,10 +250,11 @@
       preferred_date: form.preferred_date.value,
       preferred_time: form.preferred_time.value,
       message: form.message.value.trim(),
+      website: form.website ? form.website.value : '',
     };
 
     try {
-      const res = await fetch('/AutomatIA/api/contact', {
+      const res = await fetch('./api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -257,7 +266,16 @@
       document.getElementById('success-state').style.display = 'block';
       showToast('¡Mensaje enviado! Te respondo en menos de 24h.', 'success');
     } catch (err) {
-      showToast(err.message || 'Error al enviar. Inténtalo de nuevo.', 'error');
+      // Fallback: open mailto if API unavailable (static hosting)
+      const subject = encodeURIComponent('Consulta AutomatIA Pro — ' + body.name);
+      const mailBody = encodeURIComponent(
+        'Nombre: ' + body.name + '\nEmail: ' + body.email + '\nTeléfono: ' + (body.phone||'—') +
+        '\nEmpresa: ' + (body.company||'—') + '\nEmpleados: ' + (body.employees||'—') +
+        '\nServicio: ' + (body.service||'—') + '\n\nMensaje:\n' + body.message
+      );
+      const mailto = 'mailto:marcosgonme03@gmail.com?subject=' + subject + '&body=' + mailBody;
+      window.location.href = mailto;
+      showToast('Abriendo tu app de correo para enviar el mensaje…', 'success');
       btn.disabled = false;
       btn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Reservar consulta gratuita';
     }

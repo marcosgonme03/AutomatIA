@@ -2,8 +2,23 @@ const fs   = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.VERCEL
+  ? '/tmp/data'
+  : path.join(__dirname, 'data');
+const SOURCE_DIR = path.join(__dirname, 'data');
+
 fs.mkdirSync(DATA_DIR, { recursive: true });
+
+// On Vercel, copy seed data files to /tmp if they don't exist yet
+if (process.env.VERCEL) {
+  ['leads.json', 'testimonials.json', 'admin.json'].forEach(f => {
+    const dest = path.join(DATA_DIR, f);
+    const src = path.join(SOURCE_DIR, f);
+    if (!fs.existsSync(dest) && fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+    }
+  });
+}
 
 // ── Simple JSON file store (no native compilation needed) ──
 class Store {

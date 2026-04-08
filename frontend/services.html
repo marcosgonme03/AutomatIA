@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Servicios de Automatización con IA: Chatbots, Email Automation, Procesamiento de Documentos, Análisis de Datos, Integraciones personalizadas.">
-<meta name="keywords" content="chatbots IA, email automation, procesamiento documentos, análisis datos, integraciones, automatización procesos">
+<meta name="description" content="Servicios de Automatización con IA: Chatbots, Agente de Ventas IA, Asistente de Voz, Email Automation, Cobros automáticos, Generación de Contenido y más. 11 servicios para PYMEs.">
+<meta name="keywords" content="chatbots IA, agente ventas IA, asistente voz, email automation, automatización cobros, generación contenido IA, integraciones, automatización procesos">
 <meta property="og:title" content="Servicios de Automatización — AutomatIA Pro">
-<meta property="og:description" content="6 Servicios de IA diseñados para transformar tu empresa">
-<meta property="og:image" content="/AutomatIA/og-image.png">
+<meta property="og:description" content="11 Servicios de IA diseñados para transformar tu empresa">
+<meta property="og:image" content="./og-image.png">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
 <link rel="canonical" href="https://automatia.pro/services.html">
 <title>Servicios de Automatización IA — Chatbots, Email, Documentos</title>
-<link rel="stylesheet" href="/AutomatIA/css/main.css">
+<link rel="stylesheet" href="./css/main.css">
 <style>
   .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
   .svc-card {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 36px; position: relative; overflow: hidden;
     transition: transform .3s, border-color .3s, box-shadow .3s;
+    cursor: pointer;
   }
   .svc-card::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 0% 0%,rgba(124,58,237,.13),transparent 60%);opacity:0;transition:opacity .3s; }
   .svc-card:hover::before { opacity:1; }
@@ -30,6 +31,14 @@
   .svc-features { margin-top:18px;padding-top:18px;border-top:1px solid var(--border);list-style:none;display:flex;flex-direction:column;gap:6px; }
   .svc-features li { font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:8px; }
   .svc-features li::before { content:'✓';color:var(--green);font-weight:700;flex-shrink:0; }
+  .svc-more-link {
+    display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:.85rem;font-weight:600;
+    color:var(--primary-light);text-decoration:none;transition:color .2s,gap .2s;
+  }
+  .svc-more-link:hover { color:var(--cyan);gap:10px; }
+  .svc-more-link::after {
+    content:''; position:absolute; inset:0; z-index:2;
+  }
 
   /* STACK SECTION */
   .stack-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px; }
@@ -59,7 +68,7 @@
 
 <!-- HERO -->
 <div class="page-hero">
-  <div class="badge-live" style="animation:fadeDown .5s ease both"><span class="badge-dot"></span>6 servicios disponibles</div>
+  <div class="badge-live" style="animation:fadeDown .5s ease both"><span class="badge-dot"></span>11 servicios disponibles</div>
   <h1 style="animation:fadeDown .6s .1s ease both">Todo lo que puedo<br><span class="gradient-text">automatizar para ti</span></h1>
   <p style="animation:fadeDown .6s .2s ease both">Soluciones de IA personalizadas para los retos reales de las PYMEs. Sin tecnicismos, con resultados medibles.</p>
 </div>
@@ -80,6 +89,7 @@
         <li>Integración con tu CRM o base de datos</li>
         <li>Panel de análisis de conversaciones</li>
       </ul>
+      <a href="./services/chatbot-ia.html" class="svc-more-link">Ver más sobre este servicio →</a>
     </div>
 
     <div class="svc-card reveal">
@@ -94,6 +104,7 @@
         <li>Personalización dinámica del contenido</li>
         <li>Informes de rendimiento automáticos</li>
       </ul>
+      <a href="./services/email-marketing.html" class="svc-more-link">Ver más sobre este servicio →</a>
     </div>
 
     <div class="svc-card reveal">
@@ -108,6 +119,7 @@
         <li>Envío automático por email</li>
         <li>Archivo y clasificación automática</li>
       </ul>
+      <a href="./services/documentos-automaticos.html" class="svc-more-link">Ver más sobre este servicio →</a>
     </div>
 
     <div class="svc-card reveal">
@@ -122,6 +134,7 @@
         <li>Predicciones de ventas con IA</li>
         <li>Integración con tus fuentes de datos existentes</li>
       </ul>
+      <a href="./services/analisis-informes.html" class="svc-more-link">Ver más sobre este servicio →</a>
     </div>
 
     <div class="svc-card reveal">
@@ -136,6 +149,7 @@
         <li>Compatibilidad con +3000 aplicaciones</li>
         <li>Monitorización y alertas de errores</li>
       </ul>
+      <a href="./services/integracion-sistemas.html" class="svc-more-link">Ver más sobre este servicio →</a>
     </div>
 
     <div class="svc-card reveal">
@@ -150,8 +164,164 @@
         <li>Gestión de tareas sin intervención manual</li>
         <li>Auditoría completa de todos los procesos</li>
       </ul>
+      <a href="./services/automatizacion-procesos.html" class="svc-more-link">Ver más sobre este servicio →</a>
     </div>
 
+  </div>
+</section>
+
+<!-- NEW HIGH-IMPACT SERVICES -->
+<section style="background:var(--bg2)">
+  <div class="section-head centered">
+    <div class="section-label">Servicios premium</div>
+    <h2 class="section-title">Soluciones que<br><span class="gradient-text">marcan la diferencia</span></h2>
+    <p class="section-sub">Servicios avanzados de IA que tu competencia todavía no tiene.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="svc-card anim-border reveal">
+      <div class="svc-icon" style="background:rgba(245,158,11,.12)">🎯</div>
+      <h3>Agente de Ventas con IA</h3>
+      <p>Un agente inteligente que cualifica leads automáticamente por WhatsApp o web, detecta intención de compra, responde objeciones y agenda citas. Tu mejor comercial, disponible 24/7.</p>
+      <div class="svc-tags"><span class="tag">WhatsApp</span><span class="tag">Cualificación</span><span class="tag">Agenda automática</span><span class="tag">CRM</span></div>
+      <ul class="svc-features">
+        <li>Cualifica leads con preguntas inteligentes</li>
+        <li>Detecta intención de compra en tiempo real</li>
+        <li>Agenda citas directamente en tu calendario</li>
+        <li>Pasa solo leads calientes a tu equipo comercial</li>
+        <li>Seguimiento automático de oportunidades frías</li>
+      </ul>
+      <a href="./services/agente-ventas-ia.html" class="svc-more-link">Ver más sobre este servicio →</a>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(6,182,212,.12)">🎙️</div>
+      <h3>Asistente de Voz con IA</h3>
+      <p>Atención telefónica automatizada que entiende lenguaje natural, responde preguntas, toma reservas y deriva llamadas. Tu recepcionista virtual 24 horas, 365 días.</p>
+      <div class="svc-tags"><span class="tag">Voz natural</span><span class="tag">Multiidioma</span><span class="tag">Reservas</span><span class="tag">Derivación</span></div>
+      <ul class="svc-features">
+        <li>Comprensión de lenguaje natural en español</li>
+        <li>Toma de reservas y citas por teléfono</li>
+        <li>Derivación inteligente a departamentos</li>
+        <li>Transcripción y resumen de llamadas</li>
+        <li>Integración con tu sistema de telefonía</li>
+      </ul>
+      <a href="./services/asistente-voz-ia.html" class="svc-more-link">Ver más sobre este servicio →</a>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(16,185,129,.12)">👋</div>
+      <h3>Automatización de Onboarding</h3>
+      <p>Cuando un cliente firma o un empleado se incorpora, todo se activa solo: contratos, accesos, emails de bienvenida, carpetas, tareas al equipo. De 2 horas manuales a 2 minutos.</p>
+      <div class="svc-tags"><span class="tag">Clientes</span><span class="tag">Empleados</span><span class="tag">Contratos</span><span class="tag">Accesos</span></div>
+      <ul class="svc-features">
+        <li>Generación automática de contratos y accesos</li>
+        <li>Email de bienvenida personalizado</li>
+        <li>Carpeta en Drive/Notion creada automáticamente</li>
+        <li>Tareas asignadas al equipo responsable</li>
+        <li>Recordatorios automáticos de seguimiento</li>
+      </ul>
+      <a href="./services/automatizacion-onboarding.html" class="svc-more-link">Ver más sobre este servicio →</a>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(239,68,68,.12)">💰</div>
+      <h3>Automatización de Cobros y Pagos</h3>
+      <p>Facturas que se envían solas, recordatorios automáticos a morosos (amables primero, firmes después) y alertas cuando alguien no paga. Recupera el dinero que se te escapa.</p>
+      <div class="svc-tags"><span class="tag">Facturación</span><span class="tag">Seguimiento</span><span class="tag">Alertas</span><span class="tag">Conciliación</span></div>
+      <ul class="svc-features">
+        <li>Envío automático de facturas al facturar</li>
+        <li>Recordatorios escalonados a morosos</li>
+        <li>Alertas de impago para tu equipo</li>
+        <li>Conciliación bancaria automática</li>
+        <li>Informes de tesorería en tiempo real</li>
+      </ul>
+      <a href="./services/automatizacion-cobros.html" class="svc-more-link">Ver más sobre este servicio →</a>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(124,58,237,.15)">📱</div>
+      <h3>Generación de Contenido con IA</h3>
+      <p>Posts para redes sociales, newsletters, descripciones de producto y artículos SEO generados con IA y adaptados al tono de tu marca. Lo que lleva 10h/semana, en 30 minutos.</p>
+      <div class="svc-tags"><span class="tag">Redes sociales</span><span class="tag">Blog/SEO</span><span class="tag">Newsletter</span><span class="tag">Productos</span></div>
+      <ul class="svc-features">
+        <li>Calendario editorial generado con IA</li>
+        <li>Posts adaptados a cada red social</li>
+        <li>Artículos SEO optimizados para tu sector</li>
+        <li>Descripciones de producto que venden</li>
+        <li>Programación y publicación automática</li>
+      </ul>
+      <a href="./services/generacion-contenido-ia.html" class="svc-more-link">Ver más sobre este servicio →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLANS / TIERS -->
+<section>
+  <div class="section-head centered">
+    <div class="section-label">Cómo trabajamos</div>
+    <h2 class="section-title">Elige cómo empezar</h2>
+    <p class="section-sub">Desde una auditoría gratuita hasta un plan de soporte continuo.</p>
+  </div>
+  <div class="services-grid" style="max-width:1100px;margin:0 auto">
+    <div class="svc-card reveal" style="text-align:center;padding:40px 32px">
+      <div style="font-size:2.2rem;margin-bottom:12px">🔍</div>
+      <h3 style="font-size:1.1rem">Auditoría Gratuita</h3>
+      <div style="font-size:2rem;font-weight:900;margin:16px 0;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">0 €</div>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px">Informe personalizado de automatización para tu empresa. Identifico procesos, cuantifico ahorro y diseño un plan de acción.</p>
+      <ul class="svc-features" style="text-align:left">
+        <li>Análisis de tus procesos actuales</li>
+        <li>Identificación de oportunidades IA</li>
+        <li>Estimación de ahorro real</li>
+        <li>Hoja de ruta priorizada</li>
+        <li>Sin compromiso ni letra pequeña</li>
+      </ul>
+      <a href="./contact.html" class="btn-primary" style="width:100%;justify-content:center;margin-top:24px">Solicitar auditoría gratis →</a>
+    </div>
+    <div class="svc-card anim-border reveal" style="text-align:center;padding:40px 32px">
+      <div style="font-size:2.2rem;margin-bottom:12px">🚀</div>
+      <h3 style="font-size:1.1rem">Proyecto a Medida</h3>
+      <div style="font-size:2rem;font-weight:900;margin:16px 0;background:linear-gradient(135deg,var(--primary-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Desde 800 €</div>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px">Implementación completa de la solución de automatización. Diseño, desarrollo, testing, formación y puesta en marcha.</p>
+      <ul class="svc-features" style="text-align:left">
+        <li>Implementación end-to-end</li>
+        <li>Formación para tu equipo</li>
+        <li>30 días de soporte incluido</li>
+        <li>Documentación completa</li>
+        <li>Garantía de resultado (o te devuelvo el dinero)</li>
+      </ul>
+      <a href="./contact.html" class="btn-primary" style="width:100%;justify-content:center;margin-top:24px">Empezar proyecto →</a>
+    </div>
+    <div class="svc-card reveal" style="text-align:center;padding:40px 32px">
+      <div style="font-size:2.2rem;margin-bottom:12px">🛡️</div>
+      <h3 style="font-size:1.1rem">Plan de Mantenimiento</h3>
+      <div style="font-size:2rem;font-weight:900;margin:16px 0;background:linear-gradient(135deg,var(--orange),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Desde 200 €/mes</div>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:20px">Soporte continuo, monitorización, optimización mensual y nuevas automatizaciones. Tu departamento de IA externalizado.</p>
+      <ul class="svc-features" style="text-align:left">
+        <li>Monitorización 24/7 de tus flujos</li>
+        <li>Optimizaciones y mejoras mensuales</li>
+        <li>Soporte prioritario por email/WhatsApp</li>
+        <li>Informe mensual de rendimiento</li>
+        <li>Nuevas automatizaciones incluidas (hasta 2/mes)</li>
+      </ul>
+      <a href="./contact.html" class="btn-primary" style="width:100%;justify-content:center;margin-top:24px">Ver plan de soporte →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOP BANNER -->
+<section style="background:var(--bg2);padding:64px 5%">
+  <div class="cta-box reveal" style="max-width:800px;margin:0 auto;background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(239,68,68,.06));border-color:rgba(245,158,11,.25)">
+    <div style="font-size:2.5rem;margin-bottom:12px">🎓</div>
+    <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px;position:relative">Formación IA para Equipos</h2>
+    <p style="color:var(--muted);margin-bottom:12px;position:relative;max-width:560px;margin-left:auto;margin-right:auto">Workshops prácticos de 2-4 horas donde tu equipo aprende a usar IA en su día a día. ChatGPT, Copilot, herramientas de productividad y automatización básica.</p>
+    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin:20px 0;position:relative">
+      <span style="font-size:.85rem;color:var(--muted)">✓ Presencial u online</span>
+      <span style="font-size:.85rem;color:var(--muted)">✓ Material incluido</span>
+      <span style="font-size:.85rem;color:var(--muted)">✓ Desde 300 €</span>
+    </div>
+    <a href="./contact.html" class="btn-primary" style="position:relative">Reservar workshop →</a>
   </div>
 </section>
 
@@ -204,6 +374,18 @@
       <button class="faq-q">¿Puedo empezar con una sola automatización? <span class="faq-arrow">▾</span></button>
       <div class="faq-a">Por supuesto. De hecho lo recomiendo. Empezamos por el proceso que más impacto tenga en tu negocio, medimos los resultados, y escalamos desde ahí.</div>
     </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Qué es un Agente de Ventas con IA? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">Es un asistente inteligente que habla con tus potenciales clientes por WhatsApp o web, hace preguntas clave para entender qué necesitan, filtra los que realmente están interesados y agenda una cita contigo automáticamente. Solo recibes leads cualificados.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿El Asistente de Voz suena a robot? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">No. Las voces actuales de IA son prácticamente indistinguibles de una persona real. Se puede personalizar el tono, la velocidad e incluso el acento. Tus clientes no notarán la diferencia.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Qué incluye el Plan de Mantenimiento? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">Monitorización continua de que todo funcione, optimizaciones mensuales basadas en datos reales, soporte prioritario, y hasta 2 nuevas automatizaciones al mes sin coste extra. Es como tener un departamento de IA por una fracción del coste.</div>
+    </div>
   </div>
 </section>
 
@@ -212,12 +394,12 @@
   <div class="cta-box reveal" style="max-width:700px;margin:0 auto;background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(6,182,212,.08));border:1px solid rgba(124,58,237,.28);border-radius:22px;padding:60px 40px;text-align:center;position:relative;overflow:hidden;">
     <h2 style="font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px">¿Qué quieres automatizar primero?</h2>
     <p style="color:var(--muted);margin-bottom:28px">Cuéntamelo en la consulta gratuita. Juntos identificaremos el mayor impacto para tu negocio.</p>
-    <a href="/AutomatIA/contact.html" class="btn-primary">Reservar consulta gratuita →</a>
+    <a href="./contact.html" class="btn-primary">Reservar consulta gratuita →</a>
   </div>
 </section>
 
 <div id="footer-placeholder"></div>
-<script src="/AutomatIA/js/common.js"></script>
+<script src="./js/common.js"></script>
 <script>
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {

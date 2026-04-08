@@ -4,9 +4,14 @@ const nodemailer = require('nodemailer');
 const { stores } = require('../database');
 
 const SERVICE_LABELS = {
-  chatbot:'Chatbot con IA', email:'Email & Marketing', documents:'Generación de Documentos',
-  analytics:'Análisis e Informes', integrations:'Integración de Sistemas',
-  processes:'Automatización Interna', other:'Otro / No sé todavía',
+  chatbot:'Chatbot con IA', 'sales-agent':'Agente de Ventas con IA',
+  'voice-assistant':'Asistente de Voz con IA', email:'Email & Marketing',
+  documents:'Generación de Documentos', analytics:'Análisis e Informes',
+  integrations:'Integración de Sistemas', processes:'Automatización Interna',
+  onboarding:'Automatización de Onboarding', payments:'Automatización de Cobros',
+  content:'Generación de Contenido IA', workshop:'Formación IA para Equipos',
+  maintenance:'Plan de Mantenimiento', audit:'Auditoría Gratuita',
+  other:'Otro / No sé todavía',
 };
 const EMP_LABELS = {
   '1-5':'1 – 5 empleados','6-20':'6 – 20 empleados','21-50':'21 – 50 empleados',
@@ -14,7 +19,10 @@ const EMP_LABELS = {
 };
 
 router.post('/', (req, res) => {
-  const { name, email, phone='', company='', employees='', service='', message='', preferred_date='', preferred_time='' } = req.body;
+  const { name, email, phone='', company='', employees='', service='', message='', preferred_date='', preferred_time='', website='' } = req.body;
+
+  // Honeypot anti-spam: if this hidden field has a value, it's a bot
+  if (website) return res.json({ ok: true, id: 0 });
 
   if (!name || !email) return res.status(400).json({ error: 'Nombre y email son obligatorios.' });
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ error: 'Email no válido.' });

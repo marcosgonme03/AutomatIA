@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin — AutomatIA Pro</title>
-<link rel="stylesheet" href="/AutomatIA/css/main.css">
+<link rel="stylesheet" href="../css/main.css">
 <style>
   body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
   .login-box {
@@ -34,7 +34,7 @@
 
 <div class="login-box">
   <div class="login-logo">
-    <a href="/AutomatIA/">AutomatIA<span style="font-family:'JetBrains Mono',monospace">.pro</span></a>
+    <a href="../">AutomatIA<span style="font-family:'JetBrains Mono',monospace">.pro</span></a>
     <p>Panel de administración</p>
   </div>
   <div class="login-card">
@@ -52,13 +52,13 @@
       <button type="submit" class="btn-primary" id="login-btn">Entrar al panel →</button>
     </form>
   </div>
-  <div class="back-link"><a href="/AutomatIA/">← Volver a la web</a></div>
+  <div class="back-link"><a href="../">← Volver a la web</a></div>
 </div>
 
 <!-- particles only for bg -->
 <script>
   // redirect if already logged in
-  if (localStorage.getItem('admin_token')) window.location.href = '/AutomatIA/admin/dashboard.html';
+  if (localStorage.getItem('admin_token')) window.location.href = '../admin/dashboard.html';
 
   document.getElementById('login-form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -68,7 +68,7 @@
     btn.disabled = true; btn.textContent = 'Entrando...';
 
     try {
-      const res = await fetch('/AutomatIA/api/admin/login', {
+      const res = await fetch('../api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -80,7 +80,7 @@
       if (!res.ok) throw new Error(data.error || 'Error');
       localStorage.setItem('admin_token', data.token);
       localStorage.setItem('admin_user', data.username);
-      window.location.href = '/AutomatIA/admin/dashboard.html';
+      window.location.href = '../admin/dashboard.html';
     } catch (e) {
       err.textContent = e.message;
       err.style.display = 'block';

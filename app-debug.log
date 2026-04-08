@@ -73,3 +73,36 @@
 [2026-04-07T14:03:47.690Z] Routes loaded
 [2026-04-07T14:03:47.693Z] app.listen() called — waiting for Passenger/port
 [2026-04-07T14:03:47.694Z] Server listening on port 3000
+[2026-04-08T11:16:16.797Z] === APP.JS STARTING ===
+[2026-04-08T11:16:16.800Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-08T11:16:16.801Z] __dirname: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-08T11:16:16.801Z] NODE_ENV: undefined
+[2026-04-08T11:16:16.803Z] Node version: v24.14.1
+[2026-04-08T11:16:16.803Z] .env exists: true
+[2026-04-08T11:16:16.814Z] .env loaded
+[2026-04-08T11:16:17.083Z] express loaded
+[2026-04-08T11:16:17.088Z] rate-limit loaded
+[2026-04-08T11:16:17.090Z] database loaded
+[2026-04-08T11:16:17.092Z] DB initialized
+[2026-04-08T11:16:17.095Z] Frontend dir: C:\Users\marco\Desktop\prueba pagina web\frontend exists: true
+[2026-04-08T11:16:17.291Z] Routes loaded
+[2026-04-08T11:16:17.294Z] app.listen() called — waiting for Passenger/port
+[2026-04-08T11:16:17.295Z] UNCAUGHT EXCEPTION: listen EADDRINUSE: address already in use :::3000
+[2026-04-08T11:16:17.296Z] Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1948:16)
+    at listenInCluster (node:net:2005:12)
+    at Server.listen (node:net:2110:7)
+    at app.listen (C:\Users\marco\Desktop\prueba pagina web\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\marco\Desktop\prueba pagina web\app.js:92:9)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+[2026-04-08T11:23:53.360Z] === APP.JS STARTING ===
+[2026-04-08T11:23:53.364Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-08T11:23:53.365Z] __dirname: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-08T11:23:53.365Z] NODE_ENV: undefined
+[2026-04-08T11:23:53.366Z] Node version: v24.14.1
+[2026-04-08T11:23:53.366Z] .env exists: true
+[2026-04-08T11:23:53.373Z] .env loaded

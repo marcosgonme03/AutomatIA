@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/AutomatIA/api/(.*)", "dest": "app.js" },
+    { "src": "/api/(.*)", "dest": "app.js" },
+    { "src": "/health", "dest": "app.js" },
+    { "src": "/admin", "dest": "app.js" },
+    { "src": "/AutomatIA/(.*)", "dest": "app.js" },
+    { "src": "/(.*\\.(html|css|js|png|jpg|svg|ico|webp|woff2?))", "dest": "app.js" },
+    { "src": "/(.*)", "dest": "app.js" }
+  ]
+}

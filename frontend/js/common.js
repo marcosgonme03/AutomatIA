@@ -1,13 +1,30 @@
-/* ── AutomatIA Pro — Common JS ── */
+﻿/* ── AutomatIA Pro — Common JS ── */
+
+// Auto-detect base path (works on Vercel, cPanel, localhost)
+var __BASE = (function () {
+  var s = document.querySelector('script[src*="common.js"]');
+  if (s) return s.getAttribute('src').replace(/\/js\/common\.js.*$/, '');
+  return '.';
+})();
 
 // ── NAV & FOOTER INJECTION ──────────────────────────
 (function () {
   const path = window.location.pathname;
-  const BASE = '/AutomatIA';
+  const BASE = __BASE;
+
+  // Resolve relative href to absolute for comparison
+  function resolve(href) {
+    const a = document.createElement('a');
+    a.href = href;
+    return a.pathname;
+  }
 
   function isActive(href) {
-    if (href === BASE + '/' || href === BASE + '/index.html') return path === BASE + '/' || path === BASE + '/index.html' || path === BASE;
-    return path.includes(href.replace('.html', ''));
+    const resolved = resolve(href);
+    if (href === BASE + '/' || href === BASE + '/index.html') {
+      return path === resolved || path === resolved.replace('/index.html', '/') || path === resolved.replace('/index.html', '');
+    }
+    return path.includes(resolved.replace('.html', ''));
   }
 
   const links = [
@@ -17,11 +34,34 @@
     { href: BASE + '/clients.html', label: 'Clientes' },
   ];
 
+  const servicePages = [
+    { href: BASE + '/services/chatbot-ia.html', label: 'Chatbot IA' },
+    { href: BASE + '/services/email-marketing.html', label: 'Email & Marketing' },
+    { href: BASE + '/services/documentos-automaticos.html', label: 'Documentos Automáticos' },
+    { href: BASE + '/services/analisis-informes.html', label: 'Análisis e Informes' },
+    { href: BASE + '/services/integracion-sistemas.html', label: 'Integración Sistemas' },
+    { href: BASE + '/services/automatizacion-procesos.html', label: 'Automatización Procesos' },
+    { href: BASE + '/services/agente-ventas-ia.html', label: 'Agente de Ventas IA' },
+    { href: BASE + '/services/asistente-voz-ia.html', label: 'Asistente de Voz IA' },
+    { href: BASE + '/services/automatizacion-onboarding.html', label: 'Onboarding Automático' },
+    { href: BASE + '/services/automatizacion-cobros.html', label: 'Cobros y Pagos' },
+    { href: BASE + '/services/generacion-contenido-ia.html', label: 'Contenido con IA' },
+  ];
+
   const navHTML = `
     <nav id="main-nav">
       <div class="logo"><a href="${BASE}/"><span>Auto</span>matIA<span>.pro</span></a></div>
       <ul class="nav-links">
-        ${links.map(l => `<li><a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a></li>`).join('')}
+        <li class="nav-dropdown">
+          <a href="${BASE}/services.html" class="${isActive(BASE + '/services') ? 'active' : ''}">Servicios <svg width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left:4px;vertical-align:middle;transition:transform .3s"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <div class="nav-dropdown-menu">
+            <div class="nav-dropdown-grid">
+              ${servicePages.map(s => `<a href="${s.href}" class="nav-dropdown-item${isActive(s.href) ? ' active' : ''}">${s.label}</a>`).join('')}
+            </div>
+            <a href="${BASE}/services.html" class="nav-dropdown-all">Ver todos los servicios →</a>
+          </div>
+        </li>
+        ${links.filter(l => l.label !== 'Servicios').map(l => `<li><a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a></li>`).join('')}
         <li><a href="${BASE}/contact.html" class="nav-cta${isActive(BASE + '/contact.html') ? ' active' : ''}">Consulta gratis →</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menú">
@@ -29,7 +69,14 @@
       </button>
     </nav>
     <div class="mobile-menu" id="mobile-menu">
-      ${links.map(l => `<a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a>`).join('')}
+      <div class="mobile-svc-toggle">
+        <a href="${BASE}/services.html" class="${isActive(BASE + '/services') ? 'active' : ''}" style="flex:1">Servicios</a>
+        <button class="mobile-svc-btn" aria-label="Expandir servicios">▾</button>
+      </div>
+      <div class="mobile-svc-list" style="display:none">
+        ${servicePages.map(s => `<a href="${s.href}" class="mobile-svc-item${isActive(s.href) ? ' active' : ''}">${s.label}</a>`).join('')}
+      </div>
+      ${links.filter(l => l.label !== 'Servicios').map(l => `<a href="${l.href}" class="${isActive(l.href) ? 'active' : ''}">${l.label}</a>`).join('')}
       <a href="${BASE}/contact.html" class="nav-cta" style="text-align:center;margin-top:8px">Consulta gratis →</a>
     </div>`;
 
@@ -58,6 +105,18 @@
     this.classList.toggle('open');
     document.getElementById('mobile-menu').classList.toggle('open');
   });
+
+  // Mobile services accordion
+  const svcBtn = document.querySelector('.mobile-svc-btn');
+  if (svcBtn) {
+    svcBtn.addEventListener('click', function () {
+      const list = document.querySelector('.mobile-svc-list');
+      const open = list.style.display !== 'none';
+      list.style.display = open ? 'none' : 'flex';
+      this.textContent = open ? '▾' : '▴';
+      this.classList.toggle('open', !open);
+    });
+  }
 })();
 
 // ── PARTICLES CANVAS ────────────────────────────────
@@ -290,7 +349,7 @@ window.showToast = function (msg, type = 'success') {
 
 // ── STICKY CTA BAR ───────────────────────────────────
 (function () {
-  const BASE = '/AutomatIA';
+  const BASE = __BASE;
   const hero = document.querySelector('#hero, .page-hero');
   if (!hero) return;
 
@@ -311,13 +370,12 @@ window.showToast = function (msg, type = 'success') {
 
 // ── SMOOTH PAGE TRANSITIONS ──────────────────────────
 (function () {
-  const BASE = '/AutomatIA';
   document.addEventListener('click', e => {
     const link = e.target.closest('a');
     if (!link) return;
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || link.target === '_blank') return;
-    if (!href.startsWith(BASE) && !href.startsWith('/')) return;
+    if (!href.endsWith('.html') && !href.endsWith('/')) return;
 
     e.preventDefault();
     document.body.classList.add('page-transition-out');
@@ -345,7 +403,7 @@ window.showToast = function (msg, type = 'success') {
 (function () {
   if (localStorage.getItem('cookie-consent')) return;
 
-  const BASE = '/AutomatIA';
+  const BASE = __BASE;
   const banner = document.createElement('div');
   banner.className = 'cookie-banner';
   banner.innerHTML = `
@@ -483,6 +541,130 @@ window.validateField = function (input, rules) {
       if (group && group.classList.contains('has-error')) {
         validateField(input, fieldRules);
       }
+    });
+  });
+})();
+
+// ══════════════════════════════════════════════════════
+//  PHASE 3 — HIGH IMPACT FEATURES
+// ══════════════════════════════════════════════════════
+
+// ── SOCIAL PROOF NOTIFICATIONS ──────────────────────
+(function () {
+  if (window.location.pathname.includes('/admin')) return;
+
+  const proofs = [
+    { name: 'María C.', city: 'Madrid', action: 'solicitó una consulta gratuita', time: 'hace 3 min' },
+    { name: 'Carlos R.', city: 'Barcelona', action: 'automatizó su email marketing', time: 'hace 12 min' },
+    { name: 'Laura G.', city: 'Valencia', action: 'implementó un chatbot IA', time: 'hace 25 min' },
+    { name: 'Pedro M.', city: 'Sevilla', action: 'ahorró 15h semanales', time: 'hace 1 hora' },
+    { name: 'Ana S.', city: 'Bilbao', action: 'conectó su CRM con IA', time: 'hace 2 horas' },
+    { name: 'Javier L.', city: 'Málaga', action: 'redujo costes un 35%', time: 'hace 3 horas' },
+    { name: 'Elena F.', city: 'Zaragoza', action: 'solicitó una demo', time: 'hace 4 horas' },
+    { name: 'Roberto D.', city: 'Murcia', action: 'automatizó facturación', time: 'hace 5 horas' },
+  ];
+
+  const popup = document.createElement('div');
+  popup.className = 'social-proof';
+  popup.innerHTML = `
+    <button class="social-proof-close" aria-label="Cerrar">✕</button>
+    <div class="social-proof-avatar"></div>
+    <div>
+      <div class="social-proof-text"></div>
+      <div class="social-proof-time"></div>
+    </div>`;
+  document.body.appendChild(popup);
+
+  let idx = Math.floor(Math.random() * proofs.length);
+  let timer = null;
+  let dismissed = false;
+
+  popup.querySelector('.social-proof-close').addEventListener('click', () => {
+    popup.classList.remove('visible');
+    dismissed = true;
+    if (timer) clearTimeout(timer);
+  });
+
+  function show() {
+    if (dismissed) return;
+    const p = proofs[idx % proofs.length];
+    popup.querySelector('.social-proof-avatar').textContent = p.name.charAt(0);
+    popup.querySelector('.social-proof-text').innerHTML = `<strong>${p.name}</strong> <span>de ${p.city}</span><br><span>${p.action}</span>`;
+    popup.querySelector('.social-proof-time').textContent = p.time;
+    popup.classList.add('visible');
+    idx++;
+    timer = setTimeout(() => {
+      popup.classList.remove('visible');
+      timer = setTimeout(show, 18000 + Math.random() * 12000);
+    }, 5000);
+  }
+
+  setTimeout(show, 8000 + Math.random() * 5000);
+})();
+
+// ── PARALLAX EFFECT ON SECTIONS ──────────────────────
+(function () {
+  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Add parallax bg to specific sections
+  document.querySelectorAll('#pain, #process-prev, #roi-calc').forEach(sec => {
+    sec.classList.add('parallax-section');
+    const bg = document.createElement('div');
+    bg.className = 'parallax-bg';
+    sec.prepend(bg);
+  });
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.parallax-bg').forEach(bg => {
+        const rect = bg.parentElement.getBoundingClientRect();
+        const speed = 0.15;
+        const yOffset = (rect.top * speed);
+        bg.style.transform = `translateY(${yOffset}px)`;
+      });
+      ticking = false;
+    });
+  }, { passive: true });
+})();
+
+// ── HONEYPOT ANTI-SPAM (contact form) ────────────────
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  // Add hidden honeypot field
+  const honey = document.createElement('div');
+  honey.className = 'form-honey';
+  honey.setAttribute('aria-hidden', 'true');
+  honey.innerHTML = '<label for="website">Website</label><input type="text" name="website" id="website" tabindex="-1" autocomplete="off">';
+  form.appendChild(honey);
+})();
+
+// ── SECTION DIVIDERS ─────────────────────────────────
+(function () {
+  document.querySelectorAll('section + section').forEach(sec => {
+    if (sec.querySelector('.section-divider')) return;
+    const hr = document.createElement('hr');
+    hr.className = 'section-divider';
+    sec.parentNode.insertBefore(hr, sec);
+  });
+})();
+
+// ── COUNTER INCREMENT ON HOVER (result cards) ────────
+(function () {
+  document.querySelectorAll('.res-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transform = 'translateY(-6px)';
+      card.style.borderColor = 'rgba(124,58,237,.3)';
+      card.style.boxShadow = '0 16px 48px rgba(124,58,237,.12)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.borderColor = '';
+      card.style.boxShadow = '';
     });
   });
 })();

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // ── Debug log (writes to file so we can check on server) ──
-const LOG_FILE = path.join(__dirname, 'app-debug.log');
+const LOG_FILE = process.env.VERCEL ? '/tmp/app-debug.log' : path.join(__dirname, 'app-debug.log');
 function log(msg) {
   const line = `[${new Date().toISOString()}] ${msg}\n`;
   try { fs.appendFileSync(LOG_FILE, line); } catch(e) {}
@@ -86,23 +86,29 @@ try {
     next();
   });
 
-  // Start server — Passenger will hook into this
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    log('Server listening on port ' + PORT);
-  });
+  // Start server (only when not on Vercel — Vercel uses the export)
+  if (!process.env.VERCEL) {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      log('Server listening on port ' + PORT);
+    });
+    log('app.listen() called — waiting for Passenger/port');
+  }
 
-  log('app.listen() called — waiting for Passenger/port');
+  // Export for Vercel serverless
+  module.exports = app;
 
 } catch (err) {
   log('FATAL ERROR: ' + err.message);
   log(err.stack);
 
   // Emergency fallback — show error in browser
-  const http = require('http');
-  const PORT = process.env.PORT || 3000;
-  http.createServer((req, res) => {
-    res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end('<h1>Error al arrancar AutomatIA</h1><pre>' + err.stack + '</pre>');
-  }).listen(PORT);
+  if (!process.env.VERCEL) {
+    const http = require('http');
+    const PORT = process.env.PORT || 3000;
+    http.createServer((req, res) => {
+      res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end('<h1>Error al arrancar AutomatIA</h1><pre>' + err.stack + '</pre>');
+    }).listen(PORT);
+  }
 }
