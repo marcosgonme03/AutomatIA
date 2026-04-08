@@ -6,6 +6,20 @@ Plataforma completa de consultoría y servicios de automatización empresarial c
 
 ---
 
+## 🎯 ¿Desplegar en cPanel?
+
+**Lee primero:**
+- 📖 [`QUICK_START.md`](./QUICK_START.md) — 5 minutos (resumen básico)
+- 📋 [`DEPLOYMENT.md`](./DEPLOYMENT.md) — Guía completa paso a paso
+- 🔧 [`CPANEL_SETUP.md`](./CPANEL_SETUP.md) — Instrucciones visuales con setupnodejs
+- ✅ [`PRE_DEPLOYMENT_CHECKLIST.md`](./PRE_DEPLOYMENT_CHECKLIST.md) — Verificación antes de desplegar
+
+**Setup automático:** Ejecuta `bash setup.sh` para preparar el proyecto
+
+---
+
+---
+
 ## ✨ Características
 
 ### 🎯 Landing Page

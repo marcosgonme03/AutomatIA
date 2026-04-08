@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Resultados reales: 40% reducción de costes, 87% tareas automatizables, 50+ empresas transformadas. ROI calculator incluido.">
+<meta name="keywords" content="ROI automatización, casos de éxito, reducción costes, resultados IA, transformación empresas">
+<meta property="og:title" content="Resultados y Casos de Éxito — AutomatIA Pro">
+<meta property="og:description" content="40% reducción de costes. Descubre nuestros casos de éxito">
+<meta property="og:image" content="./og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<link rel="canonical" href="https://automatia.pro/results.html">
+<title>Resultados y ROI — 40% de Ahorro en Costes | Casos de Éxito</title>
+<link rel="stylesheet" href="css/main.css">
+<style>
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 80px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px 24px; text-align: center; position: relative; overflow: hidden; }
+  .stat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--primary), var(--cyan)); }
+  .stat-big { font-size: 3.2rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; display: block; margin-bottom: 8px; }
+  .stat-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: 4px; }
+  .stat-card p { font-size: .8rem; color: var(--muted); }
+
+  /* CASE STUDIES */
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .case-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: transform .3s, border-color .3s; }
+  .case-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,.35); }
+  .case-header { padding: 24px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 14px; }
+  .case-avatar { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .case-header h3 { font-size: 1rem; font-weight: 700; }
+  .case-header p { font-size: .8rem; color: var(--muted); }
+  .case-body { padding: 24px 28px; }
+  .case-body .label { font-size: .72rem; font-weight: 700; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; }
+  .case-body p { font-size: .88rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+  .case-metrics { display: flex; gap: 20px; flex-wrap: wrap; }
+  .case-metric { text-align: center; }
+  .case-metric strong { display: block; font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .case-metric span { font-size: .75rem; color: var(--muted); }
+
+  /* ROI CALCULATOR */
+  #calculator { background: var(--bg2); }
+  .calc-wrap {
+    max-width: 800px; margin: 0 auto;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+  }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  @media(max-width: 640px) { .calc-grid { grid-template-columns: 1fr; } }
+  .calc-inputs { padding: 40px; border-right: 1px solid var(--border); }
+  @media(max-width:640px){ .calc-inputs { border-right: none; border-bottom: 1px solid var(--border); } }
+  .calc-inputs h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 24px; }
+  .calc-field { margin-bottom: 24px; }
+  .calc-field label { display: block; font-size: .82rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+  .calc-field input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; }
+  .calc-field .val { display: inline-flex; align-items: center; justify-content: center; background: rgba(124,58,237,.15); border: 1px solid rgba(124,58,237,.3); border-radius: 8px; padding: 4px 12px; font-weight: 700; color: var(--primary-light); font-size: .9rem; margin-top: 4px; }
+  .calc-field input[type="number"] { background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 10px 14px; color: var(--text); font-family: 'Inter', sans-serif; font-size: .95rem; width: 100%; outline: none; }
+  .calc-field input[type="number"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124,58,237,.15); }
+  .calc-results { padding: 40px; background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(6,182,212,.05)); display: flex; flex-direction: column; justify-content: center; }
+  .calc-results h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 28px; }
+  .calc-result-item { margin-bottom: 24px; }
+  .calc-result-item label { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .calc-result-item .amount { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+  .calc-result-item .sub { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+  .calc-divider { height: 1px; background: var(--border); margin: 16px 0; }
+  .calc-cta { margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div>
+<div class="grid-bg"></div><canvas id="canvas"></canvas>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="badge-live" style="animation:fadeDown .5s ease both"><span class="badge-dot"></span>Datos reales de clientes</div>
+  <h1 style="animation:fadeDown .6s .1s ease both">Resultados que<br><span class="gradient-text">hablan por sí solos</span></h1>
+  <p style="animation:fadeDown .6s .2s ease both">No son promesas. Son métricas reales de PYMEs que ya han automatizado sus procesos.</p>
+</div>
+
+<!-- STATS -->
+<section>
+  <div class="stats-grid">
+    <div class="stat-card reveal"><span class="stat-big" data-count="40" data-suffix="%">0%</span><h3>Reducción de costes</h3><p>En procesos operativos automatizados</p></div>
+    <div class="stat-card reveal"><span class="stat-big" data-count="12">0</span><h3>horas/semana ahorradas</h3><p>Por empleado de media</p></div>
+    <div class="stat-card reveal"><span class="stat-big" data-count="98" data-suffix="%">0%</span><h3>Satisfacción de clientes</h3><p>Con atención automatizada 24/7</p></div>
+    <div class="stat-card reveal"><span class="stat-big" data-count="3">0</span><h3>meses para el ROI</h3><p>Retorno de inversión garantizado</p></div>
+    <div class="stat-card reveal"><span class="stat-big" data-count="50" data-suffix="+">0+</span><h3>PYMEs automatizadas</h3><p>En sectores muy diferentes</p></div>
+    <div class="stat-card reveal"><span class="stat-big" data-count="3">0</span><h3>semanas de implementación</h3><p>De media por proyecto</p></div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section style="background:var(--bg2);padding-top:96px">
+  <div class="section-head centered">
+    <div class="section-label">Casos de éxito</div>
+    <h2 class="section-title">Empresas que ya lo<br>están viviendo</h2>
+  </div>
+  <div class="cases">
+    <div class="case-card reveal">
+      <div class="case-header">
+        <div class="case-avatar" style="background:rgba(124,58,237,.15)">👗</div>
+        <div><h3>Tienda online de moda</h3><p>12 empleados · eCommerce</p></div>
+      </div>
+      <div class="case-body">
+        <div class="label">El problema</div>
+        <p>Gestionaban pedidos, devoluciones y atención al cliente de forma completamente manual. 3 empleados dedicados solo a responder emails y WhatsApp.</p>
+        <div class="label">La solución</div>
+        <p>Chatbot en WhatsApp + automatización de emails de pedido, envío y devolución. Integración con su CRM y con la tienda WooCommerce.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>15h</strong><span>ahorradas/semana</span></div>
+          <div class="case-metric"><strong>-65%</strong><span>emails manuales</span></div>
+          <div class="case-metric"><strong>2 meses</strong><span>para el ROI</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-header">
+        <div class="case-avatar" style="background:rgba(6,182,212,.12)">💼</div>
+        <div><h3>Consultoría B2B</h3><p>25 empleados · Servicios profesionales</p></div>
+      </div>
+      <div class="case-body">
+        <div class="label">El problema</div>
+        <p>El equipo comercial perdía 3 horas diarias introduciendo datos entre CRM, Excel y sistema de facturación. Errores constantes y datos desactualizados.</p>
+        <div class="label">La solución</div>
+        <p>Integración completa CRM + facturación + email. Pipeline de ventas automatizado con seguimiento inteligente de leads.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>3h/día</strong><span>liberadas</span></div>
+          <div class="case-metric"><strong>+35%</strong><span>conversión</span></div>
+          <div class="case-metric"><strong>0 errores</strong><span>de datos</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card reveal">
+      <div class="case-header">
+        <div class="case-avatar" style="background:rgba(16,185,129,.12)">🏥</div>
+        <div><h3>Clínica dental</h3><p>8 empleados · Salud</p></div>
+      </div>
+      <div class="case-body">
+        <div class="label">El problema</div>
+        <p>Confirmación de citas manual por teléfono, recordatorios en papel, informes clínicos escritos a mano. La recepcionista dedicaba el 80% del tiempo a llamadas.</p>
+        <div class="label">La solución</div>
+        <p>Sistema de citas online + recordatorios automáticos por SMS/WhatsApp + generación automática de informes clínicos y presupuestos.</p>
+        <div class="case-metrics">
+          <div class="case-metric"><strong>-80%</strong><span>llamadas manuales</span></div>
+          <div class="case-metric"><strong>-40%</strong><span>no shows</span></div>
+          <div class="case-metric"><strong>+22%</strong><span>capacidad</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section id="calculator">
+  <div class="section-head centered">
+    <div class="section-label">Calculadora</div>
+    <h2 class="section-title">Calcula cuánto puedes<br>ahorrar tú</h2>
+    <p class="section-sub">Mueve los sliders y obtén una estimación de tu ahorro potencial con automatización.</p>
+  </div>
+  <div class="calc-wrap reveal">
+    <div class="calc-grid">
+      <div class="calc-inputs">
+        <h3>Datos de tu empresa</h3>
+        <div class="calc-field">
+          <label>Empleados realizando tareas manuales: <span class="val" id="v-emp">3</span></label>
+          <input type="range" id="r-emp" min="1" max="50" value="3">
+        </div>
+        <div class="calc-field">
+          <label>Horas/semana por empleado en tareas manuales: <span class="val" id="v-hours">10</span>h</label>
+          <input type="range" id="r-hours" min="1" max="40" value="10">
+        </div>
+        <div class="calc-field">
+          <label>Coste hora por empleado (€)</label>
+          <input type="number" id="r-cost" value="18" min="8" max="100" step="1">
+        </div>
+        <div class="calc-field">
+          <label>% de tareas que pueden automatizarse: <span class="val" id="v-pct">70</span>%</label>
+          <input type="range" id="r-pct" min="10" max="90" value="70" step="5">
+        </div>
+      </div>
+      <div class="calc-results">
+        <h3>Tu ahorro estimado</h3>
+        <div class="calc-result-item">
+          <label>Ahorro anual</label>
+          <div class="amount" id="res-annual">0 €</div>
+          <div class="sub">En costes de personal en tareas manuales</div>
+        </div>
+        <div class="calc-divider"></div>
+        <div class="calc-result-item">
+          <label>Horas liberadas al año</label>
+          <div class="amount" id="res-hours">0 h</div>
+          <div class="sub">Para invertir en tareas de mayor valor</div>
+        </div>
+        <div class="calc-divider"></div>
+        <div class="calc-result-item">
+          <label>ROI en meses</label>
+          <div class="amount" id="res-roi">~3 meses</div>
+          <div class="sub">Estimando una inversión media de 2.000€</div>
+        </div>
+        <div class="calc-cta">
+          <a href="contact.html" class="btn-primary" style="width:100%;justify-content:center">Quiero este ahorro →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;color:var(--muted2);font-size:.78rem;margin-top:16px;position:relative;z-index:1">* Estimación orientativa. Los resultados reales pueden variar según sector y proceso.</p>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/common.js"></script>
+<script>
+  function calc() {
+    const emp   = parseInt(document.getElementById('r-emp').value);
+    const hours = parseInt(document.getElementById('r-hours').value);
+    const cost  = parseFloat(document.getElementById('r-cost').value) || 18;
+    const pct   = parseInt(document.getElementById('r-pct').value) / 100;
+
+    document.getElementById('v-emp').textContent   = emp;
+    document.getElementById('v-hours').textContent = hours;
+    document.getElementById('v-pct').textContent   = Math.round(pct * 100);
+
+    const weeksPerYear   = 48;
+    const savedHoursWeek = emp * hours * pct;
+    const savedHoursYear = Math.round(savedHoursWeek * weeksPerYear);
+    const savedEurosYear = Math.round(savedHoursYear * cost);
+    const investment     = 2000;
+    const roiMonths      = savedEurosYear > 0 ? Math.ceil((investment / savedEurosYear) * 12) : '—';
+
+    document.getElementById('res-annual').textContent = savedEurosYear.toLocaleString('es-ES') + ' €';
+    document.getElementById('res-hours').textContent  = savedHoursYear.toLocaleString('es-ES') + ' h';
+    document.getElementById('res-roi').textContent    = roiMonths !== '—' ? `~${roiMonths} meses` : '—';
+  }
+
+  ['r-emp','r-hours','r-cost','r-pct'].forEach(id => {
+    document.getElementById(id).addEventListener('input', calc);
+  });
+  calc();
+</script>
+</body>
+</html>

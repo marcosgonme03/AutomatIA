@@ -3,7 +3,7 @@
 // ── NAV & FOOTER INJECTION ──────────────────────────
 (function () {
   const path = window.location.pathname;
-  const BASE = '/AutomatIA';
+  const BASE = '';
 
   function isActive(href) {
     if (href === BASE + '/' || href === BASE + '/index.html') return path === BASE + '/' || path === BASE + '/index.html' || path === BASE;
@@ -41,7 +41,7 @@
         <a href="${BASE}/privacy.html">Privacidad</a>
         <a href="${BASE}/legal.html">Aviso legal</a>
         <a href="${BASE}/contact.html">Contacto</a>
-        <a href="${BASE}/admin/login.html" style="opacity:.4">Admin</a>
+        <!-- <a href="${BASE}/admin/login.html"<!-- Admin deshabilitado en versión estática --> style="opacity:.4">Admin</a>
       </div>
     </footer>`;
 
@@ -290,7 +290,7 @@ window.showToast = function (msg, type = 'success') {
 
 // ── STICKY CTA BAR ───────────────────────────────────
 (function () {
-  const BASE = '/AutomatIA';
+  const BASE = '';
   const hero = document.querySelector('#hero, .page-hero');
   if (!hero) return;
 
@@ -311,7 +311,7 @@ window.showToast = function (msg, type = 'success') {
 
 // ── SMOOTH PAGE TRANSITIONS ──────────────────────────
 (function () {
-  const BASE = '/AutomatIA';
+  const BASE = '';
   document.addEventListener('click', e => {
     const link = e.target.closest('a');
     if (!link) return;
@@ -345,7 +345,7 @@ window.showToast = function (msg, type = 'success') {
 (function () {
   if (localStorage.getItem('cookie-consent')) return;
 
-  const BASE = '/AutomatIA';
+  const BASE = '';
   const banner = document.createElement('div');
   banner.className = 'cookie-banner';
   banner.innerHTML = `

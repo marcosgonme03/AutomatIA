@@ -1,0 +1,75 @@
+[2026-04-07T13:47:28.665Z] === APP.JS STARTING ===
+[2026-04-07T13:47:28.672Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T13:47:28.673Z] __dirname: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T13:47:28.674Z] NODE_ENV: undefined
+[2026-04-07T13:47:28.674Z] Node version: v24.14.1
+[2026-04-07T13:47:28.676Z] .env exists: true
+[2026-04-07T13:47:28.695Z] .env loaded
+[2026-04-07T13:47:28.841Z] express loaded
+[2026-04-07T13:47:28.849Z] rate-limit loaded
+[2026-04-07T13:47:28.858Z] database loaded
+[2026-04-07T13:47:28.861Z] DB initialized
+[2026-04-07T13:47:28.865Z] Frontend dir: C:\Users\marco\Desktop\prueba pagina web\frontend exists: true
+[2026-04-07T13:47:29.012Z] Routes loaded
+[2026-04-07T13:47:29.017Z] app.listen() called — waiting for Passenger/port
+[2026-04-07T13:47:29.020Z] Server listening on port 3000
+[2026-04-07T13:47:30.591Z] REQUEST: GET /AutomatIA/css/main.css
+[2026-04-07T13:47:30.693Z] REQUEST: GET /AutomatIA/js/common.js
+[2026-04-07T13:48:17.509Z] REQUEST: GET /AutomatIA/css/main.css
+[2026-04-07T13:48:17.602Z] REQUEST: GET /AutomatIA/js/common.js
+[2026-04-07T13:52:59.482Z] REQUEST: GET /AutomatIA/css/main.css
+[2026-04-07T13:53:42.802Z] REQUEST: GET /AutomatIA/css/main.css
+[2026-04-07T13:54:19.555Z] REQUEST: GET /AutomatIA/css/main.css
+[2026-04-07T13:54:19.568Z] REQUEST: GET /AutomatIA/js/common.js
+[2026-04-07T13:54:20.673Z] REQUEST: GET /AutomatIA/css/main.css
+[2026-04-07T13:54:20.788Z] REQUEST: GET /AutomatIA/js/common.js
+[2026-04-07T13:55:03.803Z] === APP.JS STARTING ===
+[2026-04-07T13:55:03.812Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T13:55:03.814Z] __dirname: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T13:55:03.817Z] NODE_ENV: undefined
+[2026-04-07T13:55:03.819Z] Node version: v24.14.1
+[2026-04-07T13:55:03.822Z] .env exists: true
+[2026-04-07T13:55:03.842Z] .env loaded
+[2026-04-07T13:55:04.137Z] express loaded
+[2026-04-07T13:55:04.142Z] rate-limit loaded
+[2026-04-07T13:55:04.157Z] database loaded
+[2026-04-07T13:55:04.160Z] DB initialized
+[2026-04-07T13:55:04.168Z] Frontend dir: C:\Users\marco\Desktop\prueba pagina web\frontend exists: true
+[2026-04-07T13:55:04.389Z] Routes loaded
+[2026-04-07T13:55:04.394Z] app.listen() called — waiting for Passenger/port
+[2026-04-07T13:55:04.396Z] Server listening on port 3000
+[2026-04-07T13:55:58.250Z] REQUEST: GET /AutomatIA/api/testimonials
+[2026-04-07T13:56:05.110Z] REQUEST: GET /favicon.ico
+[2026-04-07T13:56:06.662Z] REQUEST: POST /AutomatIA/api/admin/login
+[2026-04-07T13:56:09.100Z] REQUEST: POST /AutomatIA/api/admin/login
+[2026-04-07T13:56:26.145Z] REQUEST: GET /.well-known/appspecific/com.chrome.devtools.json
+[2026-04-07T13:57:48.497Z] === APP.JS STARTING ===
+[2026-04-07T13:57:48.505Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T13:57:48.507Z] __dirname: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T13:57:48.509Z] NODE_ENV: undefined
+[2026-04-07T13:57:48.511Z] Node version: v24.14.1
+[2026-04-07T13:57:48.514Z] .env exists: true
+[2026-04-07T13:57:48.533Z] .env loaded
+[2026-04-07T13:57:48.737Z] express loaded
+[2026-04-07T13:57:48.740Z] rate-limit loaded
+[2026-04-07T13:57:48.748Z] database loaded
+[2026-04-07T13:57:48.751Z] DB initialized
+[2026-04-07T13:57:48.757Z] Frontend dir: C:\Users\marco\Desktop\prueba pagina web\frontend exists: true
+[2026-04-07T13:57:48.931Z] Routes loaded
+[2026-04-07T13:57:48.936Z] app.listen() called — waiting for Passenger/port
+[2026-04-07T13:57:48.943Z] Server listening on port 3000
+[2026-04-07T14:03:47.325Z] === APP.JS STARTING ===
+[2026-04-07T14:03:47.335Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T14:03:47.337Z] __dirname: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-07T14:03:47.338Z] NODE_ENV: undefined
+[2026-04-07T14:03:47.339Z] Node version: v24.14.1
+[2026-04-07T14:03:47.342Z] .env exists: true
+[2026-04-07T14:03:47.359Z] .env loaded
+[2026-04-07T14:03:47.546Z] express loaded
+[2026-04-07T14:03:47.548Z] rate-limit loaded
+[2026-04-07T14:03:47.556Z] database loaded
+[2026-04-07T14:03:47.558Z] DB initialized
+[2026-04-07T14:03:47.561Z] Frontend dir: C:\Users\marco\Desktop\prueba pagina web\frontend exists: true
+[2026-04-07T14:03:47.690Z] Routes loaded
+[2026-04-07T14:03:47.693Z] app.listen() called — waiting for Passenger/port
+[2026-04-07T14:03:47.694Z] Server listening on port 3000

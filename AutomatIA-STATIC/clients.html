@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Testimonios de clientes reales que han transformado sus empresas con AutomatIA Pro. Lee sus historias de éxito.">
+<meta name="keywords" content="testimonios, clientes, opiniones, casos de éxito, satisfacción cliente">
+<meta property="og:title" content="Testimonios de Clientes — AutomatIA Pro">
+<meta property="og:description" content="Lo que nuestros clientes dicen sobre nosotros">
+<meta property="og:image" content="./og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<link rel="canonical" href="https://automatia.pro/clients.html">
+<title>Testimonios de Clientes — Opiniones Reales sobre Nuestros Servicios</title>
+<link rel="stylesheet" href="css/main.css">
+<style>
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  .testi-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 32px;
+    transition: border-color .3s, transform .3s; position: relative;
+  }
+  .testi-card:hover { transform: translateY(-4px); border-color: rgba(124,58,237,.3); }
+  .stars { color: #f59e0b; font-size: .95rem; letter-spacing: 2px; margin-bottom: 14px; }
+  .testi-card blockquote { font-size: .93rem; color: var(--muted); line-height: 1.75; margin-bottom: 22px; font-style: italic; }
+  .quote-mark { color: var(--primary-light); font-size: 1.4rem; font-style: normal; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: .95rem; color: #fff; flex-shrink: 0; }
+  .avatar-purple { background: linear-gradient(135deg,#7c3aed,#a855f7); }
+  .avatar-cyan   { background: linear-gradient(135deg,#06b6d4,#22d3ee); }
+  .avatar-green  { background: linear-gradient(135deg,#10b981,#34d399); }
+  .avatar-orange { background: linear-gradient(135deg,#f59e0b,#fbbf24); }
+  .avatar-red    { background: linear-gradient(135deg,#ef4444,#f87171); }
+  .testi-name  { font-weight: 700; font-size: .9rem; }
+  .testi-role  { font-size: .78rem; color: var(--muted); }
+  .loading-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+  .skeleton { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; animation: shimmer 1.5s infinite; }
+  @keyframes shimmer { 0%,100%{opacity:.5} 50%{opacity:1} }
+  .skel-line { height: 12px; background: var(--border2); border-radius: 6px; margin-bottom: 10px; }
+  .empty-state { text-align: center; padding: 80px 20px; color: var(--muted); }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+
+  /* SECTOR FILTER */
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+  .filter-btn { background: var(--surface); border: 1px solid var(--border); color: var(--muted); padding: 7px 18px; border-radius: 50px; font-size: .83rem; font-weight: 600; cursor: pointer; transition: all .2s; font-family: 'Inter',sans-serif; }
+  .filter-btn:hover, .filter-btn.active { background: rgba(124,58,237,.15); border-color: var(--primary); color: var(--primary-light); }
+
+  /* LOGOS */
+  .logos-row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; }
+  .logo-pill { background: var(--surface); border: 1px solid var(--border); border-radius: 50px; padding: 10px 24px; font-size: .85rem; font-weight: 600; color: var(--muted); transition: border-color .2s; }
+  .logo-pill:hover { border-color: var(--primary-light); color: var(--text); }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div>
+<div class="grid-bg"></div><canvas id="canvas"></canvas>
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="badge-live" style="animation:fadeDown .5s ease both"><span class="badge-dot"></span>Clientes satisfechos</div>
+  <h1 style="animation:fadeDown .6s .1s ease both">Lo que dicen<br><span class="gradient-text">mis clientes</span></h1>
+  <p style="animation:fadeDown .6s .2s ease both">Empresas reales, resultados reales. Esto es lo que consiguen las PYMEs que automatizan sus procesos.</p>
+</div>
+
+<section>
+  <div id="testi-container">
+    <div class="loading-grid" id="loading">
+      <div class="skeleton"><div class="skel-line" style="width:40%"></div><div class="skel-line"></div><div class="skel-line" style="width:85%"></div><div class="skel-line" style="width:60%"></div></div>
+      <div class="skeleton"><div class="skel-line" style="width:40%"></div><div class="skel-line"></div><div class="skel-line" style="width:85%"></div><div class="skel-line" style="width:60%"></div></div>
+      <div class="skeleton"><div class="skel-line" style="width:40%"></div><div class="skel-line"></div><div class="skel-line" style="width:85%"></div><div class="skel-line" style="width:60%"></div></div>
+    </div>
+    <div class="testi-grid" id="testi-grid" style="display:none"></div>
+  </div>
+</section>
+
+<!-- LOGOS SECTION -->
+<section style="background:var(--bg2)">
+  <div class="section-head centered">
+    <div class="section-label">Sectores</div>
+    <h2 class="section-title">Trabajamos con PYMEs<br>de todos los sectores</h2>
+  </div>
+  <div class="logos-row reveal">
+    <div class="logo-pill">🛒 eCommerce</div>
+    <div class="logo-pill">💼 Consultoría</div>
+    <div class="logo-pill">🏥 Salud</div>
+    <div class="logo-pill">🏗️ Construcción</div>
+    <div class="logo-pill">📱 Marketing Digital</div>
+    <div class="logo-pill">🍕 Hostelería</div>
+    <div class="logo-pill">⚖️ Legal</div>
+    <div class="logo-pill">🎓 Educación</div>
+    <div class="logo-pill">🏠 Inmobiliaria</div>
+    <div class="logo-pill">🚗 Automoción</div>
+    <div class="logo-pill">💇 Estética</div>
+    <div class="logo-pill">🏋️ Fitness</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:80px 5%;text-align:center">
+  <div class="reveal" style="max-width:660px;margin:0 auto">
+    <div class="section-label" style="display:block;margin-bottom:12px">¿Tu empresa la siguiente?</div>
+    <h2 class="section-title">Únete a las PYMEs que ya<br>trabajan en piloto automático</h2>
+    <p style="color:var(--muted);margin-bottom:32px;font-size:1rem">Empieza con una consulta gratuita. Sin compromiso, sin permanencia.</p>
+    <a href="contact.html" class="btn-primary" style="font-size:1rem;padding:16px 32px">Reservar mi consulta gratuita →</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/common.js"></script>
+<script>
+  const COLORS = { purple:'avatar-purple', cyan:'avatar-cyan', green:'avatar-green', orange:'avatar-orange', red:'avatar-red' };
+
+  async function loadTestimonials() {
+    try {
+      // const res = await fetch (API deshabilitada)('./api/testimonials');
+      const data = await res.json();
+      document.getElementById('loading').style.display = 'none';
+      const grid = document.getElementById('testi-grid');
+      grid.style.display = 'grid';
+      if (!data.length) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="icon">💬</div><p>Próximamente los testimonios de nuestros clientes.</p></div>`;
+        return;
+      }
+      grid.innerHTML = data.map((t, i) => `
+        <div class="testi-card reveal" style="transition-delay:${i*70}ms">
+          <div class="stars">${'★'.repeat(t.stars)}${'☆'.repeat(5-t.stars)}</div>
+          <blockquote><span class="quote-mark">"</span>${t.content}<span class="quote-mark">"</span></blockquote>
+          <div class="testi-author">
+            <div class="avatar ${COLORS[t.color]||'avatar-purple'}">${t.initials||t.name[0]}</div>
+            <div>
+              <div class="testi-name">${t.name}</div>
+              <div class="testi-role">${[t.role,t.company].filter(Boolean).join(' — ')}</div>
+            </div>
+          </div>
+        </div>`).join('');
+      // trigger reveal observer on new elements
+      document.querySelectorAll('.testi-card').forEach(el => {
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+        },{threshold:.1});
+        obs.observe(el);
+      });
+    } catch(e) {
+      document.getElementById('loading').innerHTML = '<p style="color:var(--muted);text-align:center">Error cargando testimonios.</p>';
+    }
+  }
+  loadTestimonials();
+</script>
+</body>
+</html>

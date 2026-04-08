@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Servicios de Automatización con IA: Chatbots, Email Automation, Procesamiento de Documentos, Análisis de Datos, Integraciones personalizadas.">
+<meta name="keywords" content="chatbots IA, email automation, procesamiento documentos, análisis datos, integraciones, automatización procesos">
+<meta property="og:title" content="Servicios de Automatización — AutomatIA Pro">
+<meta property="og:description" content="6 Servicios de IA diseñados para transformar tu empresa">
+<meta property="og:image" content="./og-image.png">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect fill='%237c3aed' width='32' height='32' rx='8'/><text x='50%' y='50%' font-size='20' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='central'>A</text></svg>">
+<link rel="canonical" href="https://automatia.pro/services.html">
+<title>Servicios de Automatización IA — Chatbots, Email, Documentos</title>
+<link rel="stylesheet" href="css/main.css">
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+  .svc-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 36px; position: relative; overflow: hidden;
+    transition: transform .3s, border-color .3s, box-shadow .3s;
+  }
+  .svc-card::before { content:'';position:absolute;inset:0;background:radial-gradient(circle at 0% 0%,rgba(124,58,237,.13),transparent 60%);opacity:0;transition:opacity .3s; }
+  .svc-card:hover::before { opacity:1; }
+  .svc-card:hover { transform:translateY(-6px);border-color:rgba(124,58,237,.45);box-shadow:0 20px 55px rgba(124,58,237,.12); }
+  .svc-icon { width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:20px; }
+  .svc-card h3 { font-size:1.15rem;font-weight:700;margin-bottom:10px; }
+  .svc-card p { color:var(--muted);font-size:.92rem;line-height:1.75;margin-bottom:18px; }
+  .svc-tags { display:flex;flex-wrap:wrap;gap:6px; }
+  .tag { display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:50px;background:rgba(124,58,237,.12);color:var(--primary-light);border:1px solid rgba(124,58,237,.25); }
+  .svc-features { margin-top:18px;padding-top:18px;border-top:1px solid var(--border);list-style:none;display:flex;flex-direction:column;gap:6px; }
+  .svc-features li { font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:8px; }
+  .svc-features li::before { content:'✓';color:var(--green);font-weight:700;flex-shrink:0; }
+
+  /* STACK SECTION */
+  .stack-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px; }
+  .stack-card {
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);
+    padding:20px;text-align:center;transition:border-color .2s,transform .2s;
+  }
+  .stack-card:hover { border-color:var(--primary);transform:translateY(-2px); }
+  .stack-card .icon { font-size:1.8rem;margin-bottom:8px; }
+  .stack-card p { font-size:.8rem;color:var(--muted);font-weight:500; }
+
+  /* FAQ */
+  .faq { display:flex;flex-direction:column;gap:12px;max-width:760px;margin:0 auto; }
+  .faq-item { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden; }
+  .faq-q { width:100%;padding:20px 24px;background:none;border:none;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left; }
+  .faq-q:hover { background:var(--surface2); }
+  .faq-arrow { font-size:1.1rem;transition:transform .3s;flex-shrink:0; }
+  .faq-item.open .faq-arrow { transform:rotate(180deg); }
+  .faq-a { max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s; padding:0 24px;color:var(--muted);font-size:.9rem;line-height:1.7; }
+  .faq-item.open .faq-a { max-height:300px;padding:0 24px 20px; }
+</style>
+</head>
+<body>
+<div class="blob blob1"></div><div class="blob blob2"></div>
+<div class="grid-bg"></div><canvas id="canvas"></canvas>
+<div id="nav-placeholder"></div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="badge-live" style="animation:fadeDown .5s ease both"><span class="badge-dot"></span>6 servicios disponibles</div>
+  <h1 style="animation:fadeDown .6s .1s ease both">Todo lo que puedo<br><span class="gradient-text">automatizar para ti</span></h1>
+  <p style="animation:fadeDown .6s .2s ease both">Soluciones de IA personalizadas para los retos reales de las PYMEs. Sin tecnicismos, con resultados medibles.</p>
+</div>
+
+<!-- SERVICES -->
+<section>
+  <div class="services-grid">
+
+    <div class="svc-card anim-border reveal">
+      <div class="svc-icon" style="background:rgba(124,58,237,.15)">💬</div>
+      <h3>Chatbot con IA para Atención al Cliente</h3>
+      <p>Asistente virtual que responde dudas, gestiona pedidos y resuelve incidencias las 24 horas, en el idioma de tu cliente y con la voz de tu marca.</p>
+      <div class="svc-tags"><span class="tag">WhatsApp</span><span class="tag">Web</span><span class="tag">Instagram</span><span class="tag">Telegram</span></div>
+      <ul class="svc-features">
+        <li>Respuestas en menos de 2 segundos</li>
+        <li>Escalado automático a humano si necesario</li>
+        <li>Multiidioma (español, inglés, catalán…)</li>
+        <li>Integración con tu CRM o base de datos</li>
+        <li>Panel de análisis de conversaciones</li>
+      </ul>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(6,182,212,.12)">✉️</div>
+      <h3>Email & Marketing Automatizado</h3>
+      <p>Secuencias de emails personalizadas, seguimiento automático de leads, recuperación de carritos abandonados y campañas que se adaptan al comportamiento del usuario.</p>
+      <div class="svc-tags"><span class="tag">Lead nurturing</span><span class="tag">Segmentación IA</span><span class="tag">A/B Testing</span></div>
+      <ul class="svc-features">
+        <li>Secuencias de bienvenida y onboarding</li>
+        <li>Recuperación automática de carritos</li>
+        <li>Segmentación inteligente por comportamiento</li>
+        <li>Personalización dinámica del contenido</li>
+        <li>Informes de rendimiento automáticos</li>
+      </ul>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(16,185,129,.12)">📄</div>
+      <h3>Generación Automática de Documentos</h3>
+      <p>Contratos, presupuestos, facturas, informes y reportes generados automáticamente desde tus datos. Elimina el copy-paste para siempre.</p>
+      <div class="svc-tags"><span class="tag">PDF</span><span class="tag">Word</span><span class="tag">Excel</span><span class="tag">Email</span></div>
+      <ul class="svc-features">
+        <li>Plantillas personalizadas con tu marca</li>
+        <li>Relleno automático desde formularios o CRM</li>
+        <li>Firma digital integrada</li>
+        <li>Envío automático por email</li>
+        <li>Archivo y clasificación automática</li>
+      </ul>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(245,158,11,.12)">📊</div>
+      <h3>Análisis e Informes Inteligentes</h3>
+      <p>Dashboards automáticos, alertas en tiempo real y reportes que se generan solos. Toma decisiones con datos precisos sin levantar un dedo.</p>
+      <div class="svc-tags"><span class="tag">KPIs en tiempo real</span><span class="tag">Predicciones IA</span><span class="tag">Alertas</span></div>
+      <ul class="svc-features">
+        <li>Dashboard personalizado con tus métricas</li>
+        <li>Alertas automáticas por email o Slack</li>
+        <li>Informes semanales/mensuales automáticos</li>
+        <li>Predicciones de ventas con IA</li>
+        <li>Integración con tus fuentes de datos existentes</li>
+      </ul>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(239,68,68,.12)">🔗</div>
+      <h3>Integración de Sistemas & APIs</h3>
+      <p>Conectamos tu CRM, ERP, tienda online, contabilidad y cualquier herramienta que uses. Datos sincronizados, flujos automáticos, cero trabajo manual.</p>
+      <div class="svc-tags"><span class="tag">Zapier</span><span class="tag">Make</span><span class="tag">API custom</span><span class="tag">Webhooks</span></div>
+      <ul class="svc-features">
+        <li>Sincronización bidireccional en tiempo real</li>
+        <li>Flujos de trabajo multi-herramienta</li>
+        <li>Sin pérdida ni duplicación de datos</li>
+        <li>Compatibilidad con +3000 aplicaciones</li>
+        <li>Monitorización y alertas de errores</li>
+      </ul>
+    </div>
+
+    <div class="svc-card reveal">
+      <div class="svc-icon" style="background:rgba(124,58,237,.15)">🤖</div>
+      <h3>Automatización de Procesos Internos</h3>
+      <p>Onboarding de empleados, aprobaciones, notificaciones, gestión de tareas. Todo lo que hoy se hace manualmente, en piloto automático.</p>
+      <div class="svc-tags"><span class="tag">RPA</span><span class="tag">Workflows</span><span class="tag">Slack/Teams</span><span class="tag">Notificaciones</span></div>
+      <ul class="svc-features">
+        <li>Flujos de aprobación automáticos</li>
+        <li>Onboarding digital de empleados y clientes</li>
+        <li>Recordatorios y seguimientos automáticos</li>
+        <li>Gestión de tareas sin intervención manual</li>
+        <li>Auditoría completa de todos los procesos</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section style="background:var(--bg2)">
+  <div class="section-head centered">
+    <div class="section-label">Compatibilidad</div>
+    <h2 class="section-title">Funciona con las herramientas<br>que ya usas</h2>
+  </div>
+  <div class="stack-grid">
+    <div class="stack-card reveal"><div class="icon">📦</div><p>HubSpot</p></div>
+    <div class="stack-card reveal"><div class="icon">🛒</div><p>WooCommerce</p></div>
+    <div class="stack-card reveal"><div class="icon">📊</div><p>Google Sheets</p></div>
+    <div class="stack-card reveal"><div class="icon">💼</div><p>Salesforce</p></div>
+    <div class="stack-card reveal"><div class="icon">📧</div><p>Mailchimp</p></div>
+    <div class="stack-card reveal"><div class="icon">💬</div><p>WhatsApp</p></div>
+    <div class="stack-card reveal"><div class="icon">📋</div><p>Notion</p></div>
+    <div class="stack-card reveal"><div class="icon">🔧</div><p>Make / Zapier</p></div>
+    <div class="stack-card reveal"><div class="icon">🏪</div><p>Shopify</p></div>
+    <div class="stack-card reveal"><div class="icon">📑</div><p>Google Drive</p></div>
+    <div class="stack-card reveal"><div class="icon">💰</div><p>Holded / Conta.</p></div>
+    <div class="stack-card reveal"><div class="icon">📞</div><p>Calendly</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="section-head centered">
+    <div class="section-label">Preguntas frecuentes</div>
+    <h2 class="section-title">Lo que más me preguntan</h2>
+  </div>
+  <div class="faq">
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Necesito conocimientos técnicos para usar las soluciones? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">No. Me encargo de toda la parte técnica. Tú solo necesitas saber qué quieres mejorar y yo lo implemento. Te formaré para que uses la solución sin depender de mí.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Cuánto tiempo tarda la implementación? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">Dependiendo de la complejidad, entre 1 y 4 semanas. Los proyectos simples (un chatbot, automatización de email) pueden estar listos en 5-7 días laborables.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Qué pasa si algo falla? ¿Hay soporte? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">Sí. Todos los proyectos incluyen un período de soporte post-implementación. Además, monitorizo los sistemas para detectar problemas antes de que te afecten.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Cuánto cuesta automatizar mi empresa? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">Cada proyecto es diferente. El rango habitual es de 500€ a 5.000€ dependiendo de la complejidad. La consulta gratuita me permite darte un presupuesto exacto. El ROI suele ser positivo en menos de 3 meses.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q">¿Puedo empezar con una sola automatización? <span class="faq-arrow">▾</span></button>
+      <div class="faq-a">Por supuesto. De hecho lo recomiendo. Empezamos por el proceso que más impacto tenga en tu negocio, medimos los resultados, y escalamos desde ahí.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding:80px 5%">
+  <div class="cta-box reveal" style="max-width:700px;margin:0 auto;background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(6,182,212,.08));border:1px solid rgba(124,58,237,.28);border-radius:22px;padding:60px 40px;text-align:center;position:relative;overflow:hidden;">
+    <h2 style="font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:800;letter-spacing:-1px;margin-bottom:12px">¿Qué quieres automatizar primero?</h2>
+    <p style="color:var(--muted);margin-bottom:28px">Cuéntamelo en la consulta gratuita. Juntos identificaremos el mayor impacto para tu negocio.</p>
+    <a href="contact.html" class="btn-primary">Reservar consulta gratuita →</a>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="js/common.js"></script>
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

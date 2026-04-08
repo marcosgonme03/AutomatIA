@@ -50,6 +50,7 @@ try {
   const frontendDir = path.join(__dirname, 'frontend');
   log('Frontend dir: ' + frontendDir + ' exists: ' + fs.existsSync(frontendDir));
   app.use(express.static(frontendDir));
+  app.use('/AutomatIA', express.static(frontendDir));
 
   // Rate limiting
   const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
@@ -61,10 +62,13 @@ try {
 
   app.use('/api/', apiLimiter);
 
-  // Routes
+  // Routes (mount on both /api and /AutomatIA/api for frontend compatibility)
   app.use('/api/contact', contactLimiter, require('./backend/routes/contact'));
   app.use('/api/testimonials', require('./backend/routes/testimonials'));
   app.use('/api/admin', require('./backend/routes/admin'));
+  app.use('/AutomatIA/api/contact', contactLimiter, require('./backend/routes/contact'));
+  app.use('/AutomatIA/api/testimonials', require('./backend/routes/testimonials'));
+  app.use('/AutomatIA/api/admin', require('./backend/routes/admin'));
   log('Routes loaded');
 
   // Admin redirect
