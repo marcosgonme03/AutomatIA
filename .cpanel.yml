@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/marcosco/public_html/AutomatIA
+    - /bin/cp -R frontend/* $DEPLOYPATH
