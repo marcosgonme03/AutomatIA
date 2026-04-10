@@ -25,11 +25,14 @@ RewriteRule ^(.*)$ index.php?%{QUERY_STRING} [L]
   Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
-# Cache static assets
+# Cache static assets — HTML/JS for 1 hour (development/updates), images for 1 year
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/css "access plus 1 year"
-  ExpiresByType application/javascript "access plus 1 year"
+  # HTML and JS - shorter cache for frequent updates
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 day"
+  # Images can be cached longer
   ExpiresByType image/png "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
