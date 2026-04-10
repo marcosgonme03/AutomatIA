@@ -1,21 +1,14 @@
-# AutomatIA Pro — cPanel Configuration
-# Frontend served via PHP from backend/public_html
-# API requests proxied to Node.js backend
+# AutomatIA Pro — cPanel Static Deployment
+# Subir contenido de frontend/ a public_html/AutomatIA/
+# Subdominio automatia.marcoscode.com → Document Root: public_html/AutomatIA
 
 # Force HTTPS
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Rewrite API requests to Node.js backend (adjust to your Node port)
-# Uncomment ProxyPass if using Apache with mod_proxy
-# ProxyPass /api http://localhost:3000/api
-# ProxyPassReverse /api http://localhost:3000/api
-
-# Serve static files from backend/public_html via PHP
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?%{QUERY_STRING} [L]
+# Custom 404
+ErrorDocument 404 /404.html
 
 # Security headers
 <IfModule mod_headers.c>
@@ -37,6 +30,7 @@ RewriteRule ^(.*)$ index.php?%{QUERY_STRING} [L]
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/svg+xml "access plus 1 year"
   ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
 # GZIP compression
@@ -48,7 +42,7 @@ RewriteRule ^(.*)$ index.php?%{QUERY_STRING} [L]
 Options -Indexes
 
 # Block access to sensitive files
-<FilesMatch "\.(env|log|json|php)$">
+<FilesMatch "\.(json|env|log)$">
   Order Allow,Deny
   Deny from all
 </FilesMatch>
@@ -58,6 +52,3 @@ Options -Indexes
   Order Allow,Deny
   Allow from all
 </Files>
-
-# Custom 404
-ErrorDocument 404 /404.html
