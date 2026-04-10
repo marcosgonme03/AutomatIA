@@ -11,16 +11,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Sync files to cPanel via FTP
-        uses: airvzxf/ftp-action@v1.2
-        with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
-          passwd: ${{ secrets.FTP_PASSWORD }}
-          local_dir: ./backend/public_html
-          remote_dir: /home/marcosco/public_html/AutomatIA
-          delete: false
-          verbose: true
+      - name: Deploy via FTP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp -e "
+          set ssl:verify-certificate no
+          open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}
+          mirror -R -e ./backend/public_html /home/marcosco/public_html/AutomatIA
+          quit
+          " 2>&1
 
       - name: Deployment Success
         if: success()
