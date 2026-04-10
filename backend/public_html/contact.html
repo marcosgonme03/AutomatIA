@@ -254,7 +254,11 @@
     };
 
     try {
-      const res = await fetch('./api/contact', {
+      // Detect API base path - in subdirectory deployment, resolve correctly
+      const apiPath = typeof __BASE !== 'undefined' && __BASE && __BASE !== '.'
+        ? (__BASE + '/api/contact')
+        : './api/contact';
+      const res = await fetch(apiPath, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

@@ -54,3 +54,18 @@
 [2026-04-10T08:37:35.144Z] Routes loaded
 [2026-04-10T08:37:35.146Z] app.listen() called — waiting for Passenger/port
 [2026-04-10T08:37:35.147Z] Server listening on port 3000
+[2026-04-10T09:38:38.130Z] === APP.JS STARTING ===
+[2026-04-10T09:38:38.140Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-10T09:38:38.141Z] __dirname: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-10T09:38:38.141Z] NODE_ENV: undefined
+[2026-04-10T09:38:38.141Z] Node version: v24.14.1
+[2026-04-10T09:38:38.142Z] .env exists: true
+[2026-04-10T09:38:38.156Z] .env loaded
+[2026-04-10T09:38:38.466Z] express loaded
+[2026-04-10T09:38:38.472Z] rate-limit loaded
+[2026-04-10T09:38:38.487Z] database loaded
+[2026-04-10T09:38:38.490Z] DB initialized
+[2026-04-10T09:38:38.493Z] Serving static files from: C:\Users\marco\Desktop\prueba pagina web\backend\public_html
+[2026-04-10T09:38:38.695Z] Routes loaded
+[2026-04-10T09:38:38.698Z] app.listen() called — waiting for Passenger/port
+[2026-04-10T09:38:38.701Z] Server listening on port 3000

@@ -1,15 +1,33 @@
 ﻿/* ── AutomatIA Pro — Common JS ── */
 
-// Auto-detect base path (works on Vercel, cPanel, localhost)
+// Auto-detect base path (works on Vercel, cPanel, localhost, subdirectories)
 var __BASE = (function () {
   var s = document.querySelector('script[src*="common.js"]');
   if (s) {
     var src = s.getAttribute('src');
-    // Handle both ./js/common.js and ../js/common.js and /path/js/common.js
-    return src.replace(/\/?js\/common\.js.*$/, '').replace(/\/$/, '') || '.';
+    // Handle various formats: ./js/common.js, ../js/common.js, /path/js/common.js, //domain/path/js/common.js
+    var base = src.replace(/\/?js\/common\.js.*$/, '').replace(/\/$/, '') || '.';
+    return base;
   }
   return '.';
 })();
+
+// Resolve a path relative to BASE for consistent navigation
+window.resolvePath = function(href) {
+  if (!href) return './';
+  if (href.startsWith('http') || href.startsWith('//') || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return href;
+  }
+  if (__BASE === '.') {
+    return href;
+  }
+  // Convert absolute-looking paths to relative when BASE is set
+  if (href.startsWith('/') && __BASE.startsWith('/')) {
+    // Both are absolute paths - ensure they're relative to BASE
+    return href;
+  }
+  return href;
+};
 
 // ── NAV & FOOTER INJECTION ──────────────────────────
 (function () {

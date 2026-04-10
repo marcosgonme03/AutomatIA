@@ -28,7 +28,8 @@
       "Bash(rm -f *.html *.png robots.txt sitemap.xml app.js package.json)",
       "Bash(rm -f .env .env.local .env.example)",
       "Bash(node -e \"require\\('./app.js'\\); setTimeout\\(\\(\\)=>process.exit\\(0\\),1500\\)\")",
-      "Bash(timeout 3 node app.js)"
+      "Bash(timeout 3 node app.js)",
+      "Bash(grep -E \"\\\\.js$|middleware\")"
     ]
   }
 }
