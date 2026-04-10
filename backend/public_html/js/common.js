@@ -257,32 +257,36 @@ window.showToast = function (msg, type = 'success') {
 //  PREMIUM UX ENHANCEMENTS
 // ══════════════════════════════════════════════════════
 
-// ── PRELOADER ────────────────────────────────────────
+// ── PAGE LOADER (non-blocking) ────────────────────────
 (function () {
-  const preloader = document.createElement('div');
-  preloader.className = 'preloader';
-  preloader.innerHTML = `
-    <div class="preloader-icon">
+  const loader = document.createElement('div');
+  loader.className = 'page-loader';
+  loader.innerHTML = `
+    <div class="page-loader-icon">
       <svg viewBox="0 0 64 64">
-        <defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+        <defs><linearGradient id="plg" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#06b6d4"/>
         </linearGradient></defs>
         <rect x="3" y="3" width="58" height="58" rx="15" class="rect-draw"/>
       </svg>
-      <div class="preloader-letter">A</div>
+      <div class="page-loader-letter">A</div>
     </div>
-    <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>`;
-  document.body.prepend(preloader);
+    <div class="page-loader-bar"><div class="page-loader-bar-fill"></div></div>`;
+  document.body.prepend(loader);
+
+  // Dismiss after page ready + minimum 1s so the animation plays fully
+  function dismiss() {
+    loader.classList.add('done');
+    document.body.classList.add('page-transition-in');
+    setTimeout(() => loader.remove(), 600);
+  }
+
   const ready = new Promise(r => {
     if (document.readyState === 'complete') r();
     else window.addEventListener('load', r);
   });
-  const minTime = new Promise(r => setTimeout(r, 1600));
-  Promise.all([ready, minTime]).then(() => {
-    preloader.classList.add('done');
-    document.body.classList.add('page-transition-in');
-    setTimeout(() => preloader.remove(), 700);
-  });
+  const minTime = new Promise(r => setTimeout(r, 1000));
+  Promise.all([ready, minTime]).then(dismiss);
 })();
 
 // ── CUSTOM CURSOR RING ───────────────────────────────
@@ -422,7 +426,18 @@ window.showToast = function (msg, type = 'success') {
 
     e.preventDefault();
     document.body.classList.add('page-transition-out');
-    setTimeout(() => { window.location.href = href; }, 280);
+    // Show loader before navigating
+    const loader = document.querySelector('.page-loader');
+    if (loader) {
+      loader.classList.remove('done');
+      // Re-trigger animations
+      loader.querySelectorAll('.rect-draw, .page-loader-letter, .page-loader-bar-fill').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight;
+        el.style.animation = '';
+      });
+    }
+    setTimeout(() => { window.location.href = href; }, 350);
   });
 })();
 

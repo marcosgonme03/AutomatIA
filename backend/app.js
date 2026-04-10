@@ -35,7 +35,7 @@ try {
   log('express loaded');
   const rateLimit = require('express-rate-limit');
   log('rate-limit loaded');
-  const { initDB } = require('./backend/database');
+  const { initDB } = require('./database');
   log('database loaded');
 
   const app = express();
@@ -46,11 +46,10 @@ try {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  // Serve frontend files
-  const frontendDir = path.join(__dirname, 'frontend');
-  log('Frontend dir: ' + frontendDir + ' exists: ' + fs.existsSync(frontendDir));
-  app.use(express.static(frontendDir));
-  app.use('/AutomatIA', express.static(frontendDir));
+  // Serve static files from public_html
+  const publicDir = path.join(__dirname, 'public_html');
+  log('Serving static files from: ' + publicDir);
+  app.use(express.static(publicDir));
 
   // Rate limiting
   const apiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
@@ -62,20 +61,13 @@ try {
 
   app.use('/api/', apiLimiter);
 
-  // Routes (mount on both /api and /AutomatIA/api for frontend compatibility)
-  app.use('/api/contact', contactLimiter, require('./backend/routes/contact'));
-  app.use('/api/testimonials', require('./backend/routes/testimonials'));
-  app.use('/api/admin', require('./backend/routes/admin'));
-  app.use('/AutomatIA/api/contact', contactLimiter, require('./backend/routes/contact'));
-  app.use('/AutomatIA/api/testimonials', require('./backend/routes/testimonials'));
-  app.use('/AutomatIA/api/admin', require('./backend/routes/admin'));
+  // Routes
+  app.use('/api/contact', contactLimiter, require('./routes/contact'));
+  app.use('/api/testimonials', require('./routes/testimonials'));
+  app.use('/api/admin', require('./routes/admin'));
   log('Routes loaded');
 
-  // Admin redirect
-  // Root → redirect to /AutomatIA/
-  app.get('/', (req, res) => res.redirect('/AutomatIA/'));
-
-  app.get('/admin', (req, res) => res.redirect('/AutomatIA/admin/login.html'));
+  app.get('/admin', (req, res) => res.redirect('/admin/login.html'));
 
   // Health check
   app.get('/health', (req, res) => res.json({ status: 'ok', time: new Date().toISOString() }));

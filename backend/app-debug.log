@@ -1,0 +1,56 @@
+[2026-04-10T08:37:19.300Z] === APP.JS STARTING ===
+[2026-04-10T08:37:19.303Z] CWD: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-10T08:37:19.304Z] __dirname: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-10T08:37:19.304Z] NODE_ENV: undefined
+[2026-04-10T08:37:19.304Z] Node version: v24.14.1
+[2026-04-10T08:37:19.305Z] .env exists: true
+[2026-04-10T08:37:19.311Z] .env loaded
+[2026-04-10T08:37:19.463Z] express loaded
+[2026-04-10T08:37:19.466Z] rate-limit loaded
+[2026-04-10T08:37:19.471Z] database loaded
+[2026-04-10T08:37:19.471Z] DB initialized
+[2026-04-10T08:37:19.473Z] Serving static files from: C:\Users\marco\Desktop\prueba pagina web\backend\public_html
+[2026-04-10T08:37:19.612Z] Routes loaded
+[2026-04-10T08:37:19.613Z] app.listen() called — waiting for Passenger/port
+[2026-04-10T08:37:19.614Z] UNCAUGHT EXCEPTION: listen EADDRINUSE: address already in use :::3000
+[2026-04-10T08:37:19.615Z] Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1948:16)
+    at listenInCluster (node:net:2005:12)
+    at Server.listen (node:net:2110:7)
+    at app.listen (C:\Users\marco\Desktop\prueba pagina web\backend\node_modules\express\lib\application.js:635:24)
+    at Object.<anonymous> (C:\Users\marco\Desktop\prueba pagina web\backend\app.js:84:9)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+[2026-04-10T08:37:30.055Z] === APP.JS STARTING ===
+[2026-04-10T08:37:30.059Z] CWD: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-10T08:37:30.059Z] __dirname: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-10T08:37:30.059Z] NODE_ENV: undefined
+[2026-04-10T08:37:30.060Z] Node version: v24.14.1
+[2026-04-10T08:37:30.060Z] .env exists: true
+[2026-04-10T08:37:30.066Z] .env loaded
+[2026-04-10T08:37:30.158Z] express loaded
+[2026-04-10T08:37:30.159Z] rate-limit loaded
+[2026-04-10T08:37:30.162Z] database loaded
+[2026-04-10T08:37:30.162Z] DB initialized
+[2026-04-10T08:37:30.163Z] Serving static files from: C:\Users\marco\Desktop\prueba pagina web\backend\public_html
+[2026-04-10T08:37:30.234Z] Routes loaded
+[2026-04-10T08:37:30.236Z] app.listen() called — waiting for Passenger/port
+[2026-04-10T08:37:30.236Z] Server listening on port 3000
+[2026-04-10T08:37:34.872Z] === APP.JS STARTING ===
+[2026-04-10T08:37:34.876Z] CWD: C:\Users\marco\Desktop\prueba pagina web
+[2026-04-10T08:37:34.877Z] __dirname: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-10T08:37:34.877Z] NODE_ENV: undefined
+[2026-04-10T08:37:34.877Z] Node version: v24.14.1
+[2026-04-10T08:37:34.878Z] .env exists: true
+[2026-04-10T08:37:34.884Z] .env loaded
+[2026-04-10T08:37:34.993Z] express loaded
+[2026-04-10T08:37:34.996Z] rate-limit loaded
+[2026-04-10T08:37:35.000Z] database loaded
+[2026-04-10T08:37:35.001Z] DB initialized
+[2026-04-10T08:37:35.010Z] Serving static files from: C:\Users\marco\Desktop\prueba pagina web\backend\public_html
+[2026-04-10T08:37:35.144Z] Routes loaded
+[2026-04-10T08:37:35.146Z] app.listen() called — waiting for Passenger/port
+[2026-04-10T08:37:35.147Z] Server listening on port 3000

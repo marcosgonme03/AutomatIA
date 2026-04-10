@@ -10,7 +10,25 @@
       "Bash(claude mcp:*)",
       "mcp__Claude_Preview__preview_start",
       "Bash(npm install:*)",
-      "Bash(bash convert-to-static.sh)"
+      "Bash(bash convert-to-static.sh)",
+      "Bash(node -e \"const app=require\\('./app.js'\\); console.log\\('APP OK'\\)\")",
+      "Bash(node -e \"require\\('./app.js'\\); setTimeout\\(\\(\\)=>process.exit\\(0\\),500\\)\")",
+      "Bash(node -e \"require\\('./app.js'\\); setTimeout\\(\\(\\)=>process.exit\\(0\\),1000\\)\")",
+      "Bash(mkdir -p backend/public_html)",
+      "Bash(cp -r admin backend/public_html/)",
+      "Bash(cp -r css backend/public_html/)",
+      "Bash(cp -r js backend/public_html/)",
+      "Bash(cp -r images backend/public_html/)",
+      "Bash(cp app.js backend/)",
+      "Bash(cp package.json backend/)",
+      "Bash(cp .env backend/)",
+      "Bash(cp .env.local backend/)",
+      "Bash(cp .env.example backend/)",
+      "Bash(rm -rf admin css js images services data)",
+      "Bash(rm -f *.html *.png robots.txt sitemap.xml app.js package.json)",
+      "Bash(rm -f .env .env.local .env.example)",
+      "Bash(node -e \"require\\('./app.js'\\); setTimeout\\(\\(\\)=>process.exit\\(0\\),1500\\)\")",
+      "Bash(timeout 3 node app.js)"
     ]
   }
 }

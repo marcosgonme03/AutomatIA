@@ -4,7 +4,7 @@
     {
       "name": "AutomatIA Pro",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["server.js"],
+      "runtimeArgs": ["backend/app.js"],
       "port": 3000
     }
   ]

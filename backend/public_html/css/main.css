@@ -479,50 +479,51 @@ section { position: relative; z-index: 1; padding: 96px 5%; }
    PREMIUM UX ENHANCEMENTS
    ══════════════════════════════════════════════════════ */
 
-/* ── PRELOADER ── */
-.preloader {
+/* ── PAGE LOADER ── */
+.page-loader {
   position: fixed; inset: 0; z-index: 10000;
   background: var(--bg);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 28px;
-  transition: opacity .6s cubic-bezier(.4,0,.2,1), visibility .6s;
+  transition: opacity .5s cubic-bezier(.4,0,.2,1), visibility .5s;
+  pointer-events: none;
 }
-.preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-.preloader-icon { position: relative; width: 72px; height: 72px; }
-.preloader-icon svg {
+.page-loader.done { opacity: 0; visibility: hidden; }
+.page-loader-icon { position: relative; width: 72px; height: 72px; }
+.page-loader-icon svg {
   width: 100%; height: 100%;
   filter: drop-shadow(0 0 24px rgba(124,58,237,.35));
 }
-.preloader-icon .rect-draw {
-  fill: none; stroke: url(#pg); stroke-width: 2.5;
+.page-loader-icon .rect-draw {
+  fill: none; stroke: url(#plg); stroke-width: 2.5;
   stroke-dasharray: 220; stroke-dashoffset: 220;
   stroke-linecap: round;
-  animation: drawRect 1.2s cubic-bezier(.4,0,.2,1) forwards;
+  animation: drawRect .8s cubic-bezier(.4,0,.2,1) forwards;
 }
 @keyframes drawRect { to { stroke-dashoffset: 0; } }
-.preloader-letter {
+.page-loader-letter {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px; font-weight: 900; font-family: 'Inter', sans-serif;
   background: linear-gradient(135deg, #a855f7, #06b6d4);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   opacity: 0; transform: scale(.7); filter: blur(4px);
-  animation: letterReveal .5s cubic-bezier(.4,0,.2,1) .7s forwards;
+  animation: loaderLetterIn .4s cubic-bezier(.4,0,.2,1) .4s forwards;
 }
-@keyframes letterReveal {
+@keyframes loaderLetterIn {
   to { opacity: 1; transform: scale(1); filter: blur(0); }
 }
-.preloader-bar {
+.page-loader-bar {
   width: 100px; height: 2px;
   background: var(--border); border-radius: 2px; overflow: hidden;
 }
-.preloader-bar-fill {
+.page-loader-bar-fill {
   height: 100%; width: 0;
   background: linear-gradient(90deg, var(--primary), var(--cyan));
   border-radius: 2px;
-  animation: barFill 1.3s cubic-bezier(.4,0,.2,1) forwards;
+  animation: loaderBarFill .7s cubic-bezier(.4,0,.2,1) forwards;
 }
-@keyframes barFill { to { width: 100%; } }
+@keyframes loaderBarFill { to { width: 100%; } }
 
 /* ── CUSTOM CURSOR RING ── */
 .cursor-ring {

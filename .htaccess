@@ -1,0 +1,60 @@
+# AutomatIA Pro — cPanel Configuration
+# Frontend served via PHP from backend/public_html
+# API requests proxied to Node.js backend
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Rewrite API requests to Node.js backend (adjust to your Node port)
+# Uncomment ProxyPass if using Apache with mod_proxy
+# ProxyPass /api http://localhost:3000/api
+# ProxyPassReverse /api http://localhost:3000/api
+
+# Serve static files from backend/public_html via PHP
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?%{QUERY_STRING} [L]
+
+# Security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Cache static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+</IfModule>
+
+# GZIP compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Block directory listing
+Options -Indexes
+
+# Block access to sensitive files
+<FilesMatch "\.(env|log|json|php)$">
+  Order Allow,Deny
+  Deny from all
+</FilesMatch>
+
+# Allow testimonials.json for static loading
+<Files "testimonials.json">
+  Order Allow,Deny
+  Allow from all
+</Files>
+
+# Custom 404
+ErrorDocument 404 /404.html
