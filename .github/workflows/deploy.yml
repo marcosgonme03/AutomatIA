@@ -11,11 +11,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via FTP
+      - name: Deploy via SFTP
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-          lftp -u '${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }}' -e "set ssl:verify-certificate no; cd /home/marcosco/public_html/AutomatIA; mirror -R --exclude backend --exclude .github --exclude .claude --exclude node_modules --exclude .git . .; quit" ${{ secrets.FTP_SERVER }}
+          sudo apt-get update -qq
+          sudo apt-get install -y sshpass rsync
+
+          sshpass -p "${{ secrets.FTP_PASSWORD }}" rsync -avz \
+            --delete \
+            --exclude='backend' \
+            --exclude='.github' \
+            --exclude='.claude' \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            --exclude='.gitignore' \
+            ./ \
+            "${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }}:/home/marcosco/public_html/AutomatIA/"
 
       - name: Deployment Success
         if: success()
@@ -23,4 +33,4 @@ jobs:
 
       - name: Deployment Failed
         if: failure()
-        run: echo "❌ Deployment failed. Check FTP credentials and connection."
+        run: echo "❌ Deployment failed. Check SFTP credentials."
