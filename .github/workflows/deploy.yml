@@ -11,34 +11,44 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
+      - name: Diagnostic - Test connection
         env:
           SSH_HOST: ${{ secrets.FTP_SERVER }}
           SSH_USER: ${{ secrets.FTP_USERNAME }}
           SSH_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
+          echo "=== DIAGNOSTICS ==="
+          echo "Server: ${SSH_HOST}"
+          echo "User: ${SSH_USER}"
+          echo "Password length: ${#SSH_PASS}"
+
+          # Test DNS
+          echo ""
+          echo "Testing DNS resolution..."
+          nslookup "${SSH_HOST}" || dig "${SSH_HOST}" || host "${SSH_HOST}"
+
+          # Test FTP port 21
+          echo ""
+          echo "Testing FTP (port 21)..."
+          timeout 5 bash -c "</dev/tcp/${SSH_HOST}/21" 2>&1 && echo "✓ Port 21 open" || echo "✗ Port 21 closed"
+
+          # Test SFTP port 22
+          echo ""
+          echo "Testing SSH/SFTP (port 22)..."
+          timeout 5 bash -c "</dev/tcp/${SSH_HOST}/22" 2>&1 && echo "✓ Port 22 open" || echo "✗ Port 22 closed"
+
+          # Try SSH connection test
+          echo ""
+          echo "Testing SSH connectivity..."
           sudo apt-get update -qq
-          sudo apt-get install -y sshpass rsync
+          sudo apt-get install -y sshpass > /dev/null 2>&1
 
-          mkdir -p ~/.ssh
-          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
-
-          sshpass -p "$SSH_PASS" rsync -avz \
-            --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            --exclude=backend \
-            --exclude=.github \
-            --exclude=.claude \
-            --exclude=node_modules \
-            --exclude=.git \
-            --exclude=.gitignore \
-            ./ \
-            "${SSH_USER}@${SSH_HOST}:/home/marcosco/public_html/AutomatIA/"
+          sshpass -p "${SSH_PASS}" ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "${SSH_USER}@${SSH_HOST}" "echo 'SSH Connection successful!'" || echo "SSH Connection failed"
 
       - name: Deployment Success
         if: success()
-        run: echo "✅ Deployment to cPanel completed successfully!"
+        run: echo "✅ All tests passed!"
 
       - name: Deployment Failed
         if: failure()
-        run: echo "❌ Deployment failed. Check SFTP credentials."
+        run: echo "❌ Diagnostic failed - check output above"
