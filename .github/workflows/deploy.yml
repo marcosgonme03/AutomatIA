@@ -12,15 +12,19 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy via FTP
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
         run: |
           sudo apt-get update
-          sudo apt-get install -y ncftp
-          ncftpput -R -v -u "${{ secrets.FTP_USERNAME }}" -p "${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}" "/home/marcosco/public_html/AutomatIA" . \
-            --exclude "^backend$" \
-            --exclude "^.github$" \
-            --exclude "^.claude$" \
-            --exclude "^node_modules$" \
-            --exclude "^.git$"
+          sudo apt-get install -y lftp
+          lftp -u "${FTP_USER},${FTP_PASS}" "${FTP_HOST}" <<EOF
+          set ssl:verify-certificate no
+          cd /home/marcosco/public_html/AutomatIA
+          mirror -R --exclude backend --exclude .github --exclude .claude --exclude node_modules --exclude .git . .
+          quit
+          EOF
 
       - name: Deployment Success
         if: success()
