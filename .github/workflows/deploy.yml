@@ -11,44 +11,47 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Diagnostic - Test connection
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y sshpass rsync
+
+      - name: Deploy files to cPanel
         env:
           SSH_HOST: ${{ secrets.FTP_SERVER }}
           SSH_USER: ${{ secrets.FTP_USERNAME }}
           SSH_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
-          echo "=== DIAGNOSTICS ==="
+          echo "Starting deployment to cPanel..."
           echo "Server: ${SSH_HOST}"
           echo "User: ${SSH_USER}"
-          echo "Password length: ${#SSH_PASS}"
 
-          # Test DNS
-          echo ""
-          echo "Testing DNS resolution..."
-          nslookup "${SSH_HOST}" || dig "${SSH_HOST}" || host "${SSH_HOST}"
+          # Create SSH config to avoid host key verification
+          mkdir -p ~/.ssh
+          echo "Host *" > ~/.ssh/config
+          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+          echo "  UserKnownHostsFile=/dev/null" >> ~/.ssh/config
+          chmod 700 ~/.ssh
 
-          # Test FTP port 21
-          echo ""
-          echo "Testing FTP (port 21)..."
-          timeout 5 bash -c "</dev/tcp/${SSH_HOST}/21" 2>&1 && echo "✓ Port 21 open" || echo "✗ Port 21 closed"
+          # Sync files to cPanel
+          sshpass -p "${SSH_PASS}" rsync -avz --delete \
+            --exclude='backend' \
+            --exclude='.github' \
+            --exclude='.claude' \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            --exclude='.gitignore' \
+            -e "ssh -o ConnectTimeout=10 -o BatchMode=no" \
+            ./ \
+            "${SSH_USER}@${SSH_HOST}:/home/marcosco/public_html/AutomatIA/"
 
-          # Test SFTP port 22
-          echo ""
-          echo "Testing SSH/SFTP (port 22)..."
-          timeout 5 bash -c "</dev/tcp/${SSH_HOST}/22" 2>&1 && echo "✓ Port 22 open" || echo "✗ Port 22 closed"
+          echo "✅ Deployment completed successfully!"
 
-          # Try SSH connection test
-          echo ""
-          echo "Testing SSH connectivity..."
-          sudo apt-get update -qq
-          sudo apt-get install -y sshpass > /dev/null 2>&1
-
-          sshpass -p "${SSH_PASS}" ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no "${SSH_USER}@${SSH_HOST}" "echo 'SSH Connection successful!'" || echo "SSH Connection failed"
-
-      - name: Deployment Success
-        if: success()
-        run: echo "✅ All tests passed!"
-
-      - name: Deployment Failed
-        if: failure()
-        run: echo "❌ Diagnostic failed - check output above"
+      - name: Verify deployment
+        env:
+          SSH_HOST: ${{ secrets.FTP_SERVER }}
+          SSH_USER: ${{ secrets.FTP_USERNAME }}
+          SSH_PASS: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          echo "Verifying files on cPanel..."
+          sshpass -p "${SSH_PASS}" ssh -o StrictHostKeyChecking=no "${SSH_USER}@${SSH_HOST}" "ls -la /home/marcosco/public_html/AutomatIA/ | head -20"
