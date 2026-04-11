@@ -11,47 +11,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      - name: Deploy with FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_SERVER }}
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y sshpass rsync
+          sudo apt-get install -y lftp
 
-      - name: Deploy files to cPanel
-        env:
-          SSH_HOST: ${{ secrets.FTP_SERVER }}
-          SSH_USER: ${{ secrets.FTP_USERNAME }}
-          SSH_PASS: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          echo "Starting deployment to cPanel..."
-          echo "Server: ${SSH_HOST}"
-          echo "User: ${SSH_USER}"
+          # Deploy using pure FTP
+          lftp -u "$FTP_USER,$FTP_PASS" "$FTP_HOST" <<EOF
+          set ftp:ssl-allow no
+          set ftp:passive-mode yes
+          cd /home/marcosco/public_html/AutomatIA
+          mirror -R --exclude backend --exclude .github --exclude .claude --exclude node_modules --exclude .git . .
+          quit
+          EOF
 
-          # Create SSH config to avoid host key verification
-          mkdir -p ~/.ssh
-          echo "Host *" > ~/.ssh/config
-          echo "  StrictHostKeyChecking no" >> ~/.ssh/config
-          echo "  UserKnownHostsFile=/dev/null" >> ~/.ssh/config
-          chmod 700 ~/.ssh
-
-          # Sync files to cPanel
-          sshpass -p "${SSH_PASS}" rsync -avz --delete \
-            --exclude='backend' \
-            --exclude='.github' \
-            --exclude='.claude' \
-            --exclude='node_modules' \
-            --exclude='.git' \
-            --exclude='.gitignore' \
-            -e "ssh -o ConnectTimeout=10 -o BatchMode=no" \
-            ./ \
-            "${SSH_USER}@${SSH_HOST}:/home/marcosco/public_html/AutomatIA/"
-
-          echo "✅ Deployment completed successfully!"
-
-      - name: Verify deployment
-        env:
-          SSH_HOST: ${{ secrets.FTP_SERVER }}
-          SSH_USER: ${{ secrets.FTP_USERNAME }}
-          SSH_PASS: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          echo "Verifying files on cPanel..."
-          sshpass -p "${SSH_PASS}" ssh -o StrictHostKeyChecking=no "${SSH_USER}@${SSH_HOST}" "ls -la /home/marcosco/public_html/AutomatIA/ | head -20"
+          echo "✅ Deployment completed!"
