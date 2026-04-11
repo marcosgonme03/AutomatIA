@@ -14,13 +14,13 @@ jobs:
       - name: Deploy via FTP
         run: |
           sudo apt-get update
-          sudo apt-get install -y lftp
-          lftp -e "
-          set ssl:verify-certificate no
-          open -u ${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}
-          mirror -R -e . /home/marcosco/public_html/AutomatIA -i backend -i .github -i .claude -i node_modules -i .git
-          quit
-          " 2>&1
+          sudo apt-get install -y ncftp
+          ncftpput -R -v -u "${{ secrets.FTP_USERNAME }}" -p "${{ secrets.FTP_PASSWORD }}" "${{ secrets.FTP_SERVER }}" "/home/marcosco/public_html/AutomatIA" . \
+            --exclude "^backend$" \
+            --exclude "^.github$" \
+            --exclude "^.claude$" \
+            --exclude "^node_modules$" \
+            --exclude "^.git$"
 
       - name: Deployment Success
         if: success()
