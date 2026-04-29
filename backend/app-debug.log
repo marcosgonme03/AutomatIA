@@ -81,3 +81,23 @@
 [2026-04-10T10:25:03.056Z] REQUEST: GET /services.html
 [2026-04-10T10:25:05.813Z] REQUEST: GET /
 [2026-04-10T10:25:06.406Z] REQUEST: GET /
+[2026-04-16T13:20:59.763Z] === APP.JS STARTING ===
+[2026-04-16T13:20:59.767Z] CWD: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-16T13:20:59.768Z] __dirname: C:\Users\marco\Desktop\prueba pagina web\backend
+[2026-04-16T13:20:59.769Z] NODE_ENV: undefined
+[2026-04-16T13:20:59.769Z] Node version: v24.14.1
+[2026-04-16T13:20:59.769Z] .env exists: true
+[2026-04-16T13:20:59.778Z] .env loaded
+[2026-04-16T13:20:59.940Z] express loaded
+[2026-04-16T13:20:59.943Z] rate-limit loaded
+[2026-04-16T13:20:59.956Z] database loaded
+[2026-04-16T13:20:59.957Z] DB initialized
+[2026-04-16T13:20:59.959Z] Serving static files from: C:\Users\marco\Desktop\prueba pagina web\backend\public_html
+[2026-04-16T13:21:00.066Z] Routes loaded
+[2026-04-16T13:21:00.069Z] app.listen() called — waiting for Passenger/port
+[2026-04-16T13:21:00.071Z] Server listening on port 3000
+[2026-04-16T13:21:12.442Z] REQUEST: GET /
+[2026-04-16T13:21:47.016Z] REQUEST: GET /
+[2026-04-16T13:21:47.625Z] REQUEST: GET /
+[2026-04-16T13:21:47.781Z] REQUEST: GET /
+[2026-04-16T13:21:47.952Z] REQUEST: GET /
